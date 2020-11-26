@@ -8,9 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject private var benchmarkService = BenchmarkService(duration: 30)
+    
+    func progressTitle() -> String {
+        if let numberOfCalculations = benchmarkService.numberOfCalculations {
+            return "\(numberOfCalculations)"
+        } else if benchmarkService.isRunning {
+            return "\(Int(benchmarkService.progress*100))%"
+        }
+        return "Benchmark"
+    }
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 50, content: {
+            ProgressView(progressTitle(), value: benchmarkService.progress, total: 1)
+            Button(benchmarkService.isRunning ? "Stop" : "Start") {
+                if benchmarkService.isRunning {
+                    benchmarkService.stop()
+                } else {
+                    benchmarkService.run()
+                }
+            }
+        })
+        .padding()
     }
 }
 
