@@ -33,6 +33,7 @@ final class BenchmarkServiceWrapper: ObservableObject {
         scores = []
         isRunning = true
         progress = 0
+        serviceIndex = 0
         benchmarkStartDate = Date()
         serviceStartDate = Date()
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { [weak self] _ in

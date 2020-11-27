@@ -8,7 +8,7 @@
 import Foundation
 
 struct BenchmarkScore: Identifiable {
-    var id = ObjectIdentifier(BenchmarkScore.self)
+    var id: String { UUID().uuidString }
     let name: String
     let score: Int
 }

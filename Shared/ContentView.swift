@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject private var benchmarkService = BenchmarkServiceWrapper(benchmarkServiceConfigurations: [BenchmarkConfigurationPrime(), BenchmarkConfigurationPrime()])
+    @ObservedObject private var benchmarkService = BenchmarkServiceWrapper(benchmarkServiceConfigurations: [BenchmarkConfigurationPrime(), BenchmarkConfigurationPrime2()])
     
     func progressTitle() -> String {
         if benchmarkService.isRunning {
