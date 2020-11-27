@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6007EDAC2571A65700E3B89E /* BenchmarkServiceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6007EDAB2571A65700E3B89E /* BenchmarkServiceConfiguration.swift */; };
+		6007EDAD2571A65700E3B89E /* BenchmarkServiceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6007EDAB2571A65700E3B89E /* BenchmarkServiceConfiguration.swift */; };
 		603C792B25718835000EB978 /* BenchmarkScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603C792A25718835000EB978 /* BenchmarkScore.swift */; };
 		603C792C25718835000EB978 /* BenchmarkScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603C792A25718835000EB978 /* BenchmarkScore.swift */; };
 		605A74ED2571866900726107 /* BenchmarkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605A74EC2571866900726107 /* BenchmarkService.swift */; };
@@ -26,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6007EDAB2571A65700E3B89E /* BenchmarkServiceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkServiceConfiguration.swift; sourceTree = "<group>"; };
 		603C792A25718835000EB978 /* BenchmarkScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkScore.swift; sourceTree = "<group>"; };
 		605A74EC2571866900726107 /* BenchmarkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkService.swift; sourceTree = "<group>"; };
 		60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculationPrime.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 				60A02E33256E940A00C0E36E /* BenchmarkServiceProtocol.swift */,
 				605A74EC2571866900726107 /* BenchmarkService.swift */,
 				603C792A25718835000EB978 /* BenchmarkScore.swift */,
+				6007EDAB2571A65700E3B89E /* BenchmarkServiceConfiguration.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -241,6 +245,7 @@
 			files = (
 				60B8892E256E834C003E93A0 /* ContentView.swift in Sources */,
 				60B8893D256E8413003E93A0 /* BenchmarkServiceWrapper.swift in Sources */,
+				6007EDAC2571A65700E3B89E /* BenchmarkServiceConfiguration.swift in Sources */,
 				603C792B25718835000EB978 /* BenchmarkScore.swift in Sources */,
 				60B8892C256E834C003E93A0 /* BenchmarkApp.swift in Sources */,
 				60A02E2D256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */,
@@ -255,6 +260,7 @@
 			files = (
 				60B8892F256E834C003E93A0 /* ContentView.swift in Sources */,
 				60B8893E256E8413003E93A0 /* BenchmarkServiceWrapper.swift in Sources */,
+				6007EDAD2571A65700E3B89E /* BenchmarkServiceConfiguration.swift in Sources */,
 				603C792C25718835000EB978 /* BenchmarkScore.swift in Sources */,
 				60B8892D256E834C003E93A0 /* BenchmarkApp.swift in Sources */,
 				60A02E2E256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */,
