@@ -9,6 +9,8 @@ import Foundation
 
 final class BenchmarkCalculationPrime: BenchmarkServiceProtocol {
     
+    var cpuCoreRunType: CpuCoreRunType { .singleCore }
+    
     var duration: TimeInterval { 10 }
     
     var description: String { "Prime" }
@@ -22,7 +24,7 @@ final class BenchmarkCalculationPrime: BenchmarkServiceProtocol {
     }
     
     private func calculatePrime() {
-        let to = Int(pow(2.0, 12.0))
+        let to = Int(pow(2.0, 32.0))
         for number in 0...to {
             _ = isPrime(number)
         }

@@ -29,12 +29,14 @@ final class BenchmarkService: ObservableObject {
     init(benchmarkServices: [BenchmarkServiceProtocol]) {
         self.benchmarkServices = benchmarkServices
         numberOfCalculations = Array(repeating: 0, count: benchmarkServices.count)
-        self.completeDuration = benchmarkServices.reduce(0, { $0 + $1.duration })
+        completeDuration = benchmarkServices.reduce(0, { $0 + $1.duration })
     }
     
     func run() {
         guard completeDuration > 0 else { return }
         score = nil
+        isRunning = true
+        progress = 0
         benchmarkStartDate = Date()
         serviceStartDate = Date()
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { [weak self] _ in
@@ -42,7 +44,7 @@ final class BenchmarkService: ObservableObject {
             guard let benchmarkStartDate = self.benchmarkStartDate else { return }
             self.updateTimer(benchmarkStartDate: benchmarkStartDate)
         })
-        startOperations()
+        generateOperations()
     }
     
     func stop() {
@@ -60,6 +62,7 @@ final class BenchmarkService: ObservableObject {
             if benchmarkServices.count > serviceIndex+1 {
                 serviceIndex += 1
                 serviceStartDate = Date()
+                generateOperations()
             } else {
                 var score = 0
                 for (index, service) in benchmarkServices.enumerated() {
@@ -76,10 +79,7 @@ final class BenchmarkService: ObservableObject {
         feedbackQueue.async { [weak self] in
             guard let self = self else { return }
             guard self.operationQueue != nil else { return }
-            DispatchQueue.main.async {
-                guard self.operationQueue != nil else { return }
-                self.numberOfCalculations[index] += 1
-            }
+            self.numberOfCalculations[index] += 1
         }
     }
     
@@ -94,7 +94,14 @@ final class BenchmarkService: ObservableObject {
     
     private func generateOperations() {
         let queue = OperationQueue()
-        for _ in 1...ProcessInfo.processInfo.processorCount {
+        let processorCount: Int
+        switch benchmarkServices[serviceIndex].cpuCoreRunType {
+        case .singleCore:
+            processorCount = 1
+        case .multiCore:
+            processorCount = ProcessInfo.processInfo.processorCount
+        }
+        for _ in 1...processorCount {
             addOperation(to: queue)
         }
         operationQueue = queue
@@ -102,12 +109,6 @@ final class BenchmarkService: ObservableObject {
     
     private func addOperation(to queue: OperationQueue) {
         queue.addOperation(calculation)
-    }
-    
-    private func startOperations() {
-        generateOperations()
-        isRunning = true
-        progress = 0
     }
     
     private func stopOperations(progress: Double) {
