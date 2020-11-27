@@ -8,20 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject private var benchmarkService = BenchmarkService( benchmarkServices: [BenchmarkCalculationPrime(), BenchmarkCalculationPrime()])
+    @ObservedObject private var benchmarkService = BenchmarkServiceWrapper(benchmarkServiceConfigurations: [BenchmarkConfigurationPrime(), BenchmarkConfigurationPrime()])
     
     func progressTitle() -> String {
-        if let score = benchmarkService.score {
-            return "Score: \(score)"
-        } else if benchmarkService.isRunning {
+        if benchmarkService.isRunning {
             return "\(Int(benchmarkService.progress*100))%"
         }
         return "Benchmark"
     }
     
     var body: some View {
-        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 50, content: {
-            ProgressView(progressTitle(), value: benchmarkService.progress, total: 1)
+        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing:40, content: {
+            HStack(alignment: .center, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
+                Spacer(minLength: 60)
+                ProgressView(progressTitle(), value: benchmarkService.progress, total: 1)
+                Spacer(minLength: 60)
+            })
+            List(benchmarkService.scores) { item in
+                HStack {
+                    Spacer()
+                    Text("\(item.name): \(item.score)")
+                    Spacer()
+                }
+            }
             Button(benchmarkService.isRunning ? "Stop" : "Start") {
                 if benchmarkService.isRunning {
                     benchmarkService.stop()
@@ -30,13 +39,12 @@ struct ContentView: View {
                 }
             }
         })
-        .padding()
+        .padding(20)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            
     }
 }

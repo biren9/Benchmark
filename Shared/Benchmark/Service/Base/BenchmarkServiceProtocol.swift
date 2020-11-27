@@ -12,11 +12,17 @@ enum CpuCoreRunType {
     case multiCore
 }
 
-protocol BenchmarkServiceProtocol {
+protocol BenchmarkServiceProtocol: class {
+    init()
+    
+    func cancel()
+    func calculate()
+    func generateScore() -> Int
+}
+
+protocol BenchmarkServiceConfigurationProtocol {
     var cpuCoreRunType: CpuCoreRunType { get }
     var description: String { get }
     var duration: TimeInterval { get }
-    
-    func calculate()
-    func generateScore(numberOfCalculations: Int) -> Int
+    var serviceType: BenchmarkServiceProtocol.Type { get }
 }

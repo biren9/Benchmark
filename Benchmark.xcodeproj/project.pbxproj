@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		603C792B25718835000EB978 /* BenchmarkScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603C792A25718835000EB978 /* BenchmarkScore.swift */; };
+		603C792C25718835000EB978 /* BenchmarkScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603C792A25718835000EB978 /* BenchmarkScore.swift */; };
+		605A74ED2571866900726107 /* BenchmarkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605A74EC2571866900726107 /* BenchmarkService.swift */; };
+		605A74EE2571866900726107 /* BenchmarkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605A74EC2571866900726107 /* BenchmarkService.swift */; };
 		60A02E2D256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */; };
 		60A02E2E256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */; };
 		60A02E34256E940A00C0E36E /* BenchmarkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E33256E940A00C0E36E /* BenchmarkServiceProtocol.swift */; };
@@ -17,11 +21,13 @@
 		60B8892F256E834C003E93A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B8891A256E834A003E93A0 /* ContentView.swift */; };
 		60B88930256E834C003E93A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60B8891B256E834C003E93A0 /* Assets.xcassets */; };
 		60B88931256E834C003E93A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60B8891B256E834C003E93A0 /* Assets.xcassets */; };
-		60B8893D256E8413003E93A0 /* BenchmarkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B8893C256E8413003E93A0 /* BenchmarkService.swift */; };
-		60B8893E256E8413003E93A0 /* BenchmarkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B8893C256E8413003E93A0 /* BenchmarkService.swift */; };
+		60B8893D256E8413003E93A0 /* BenchmarkServiceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B8893C256E8413003E93A0 /* BenchmarkServiceWrapper.swift */; };
+		60B8893E256E8413003E93A0 /* BenchmarkServiceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B8893C256E8413003E93A0 /* BenchmarkServiceWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		603C792A25718835000EB978 /* BenchmarkScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkScore.swift; sourceTree = "<group>"; };
+		605A74EC2571866900726107 /* BenchmarkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkService.swift; sourceTree = "<group>"; };
 		60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculationPrime.swift; sourceTree = "<group>"; };
 		60A02E33256E940A00C0E36E /* BenchmarkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkServiceProtocol.swift; sourceTree = "<group>"; };
 		60B88919256E834A003E93A0 /* BenchmarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkApp.swift; sourceTree = "<group>"; };
@@ -32,7 +38,7 @@
 		60B88928256E834C003E93A0 /* Benchmark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Benchmark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B8892A256E834C003E93A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60B8892B256E834C003E93A0 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		60B8893C256E8413003E93A0 /* BenchmarkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkService.swift; sourceTree = "<group>"; };
+		60B8893C256E8413003E93A0 /* BenchmarkServiceWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkServiceWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,28 +59,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		605A74E92571863A00726107 /* Prime */ = {
+			isa = PBXGroup;
+			children = (
+				60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */,
+			);
+			path = Prime;
+			sourceTree = "<group>";
+		};
 		60A02E2B256E91E000C0E36E /* Benchmark */ = {
 			isa = PBXGroup;
 			children = (
 				60A02E32256E93FF00C0E36E /* Service */,
-				60A02E31256E93F800C0E36E /* Protocol */,
 			);
 			path = Benchmark;
 			sourceTree = "<group>";
 		};
-		60A02E31256E93F800C0E36E /* Protocol */ = {
+		60A02E31256E93F800C0E36E /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				60A02E33256E940A00C0E36E /* BenchmarkServiceProtocol.swift */,
+				605A74EC2571866900726107 /* BenchmarkService.swift */,
+				603C792A25718835000EB978 /* BenchmarkScore.swift */,
 			);
-			path = Protocol;
+			path = Base;
 			sourceTree = "<group>";
 		};
 		60A02E32256E93FF00C0E36E /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				60B8893C256E8413003E93A0 /* BenchmarkService.swift */,
-				60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */,
+				60B8893C256E8413003E93A0 /* BenchmarkServiceWrapper.swift */,
+				60A02E31256E93F800C0E36E /* Base */,
+				605A74E92571863A00726107 /* Prime */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -224,10 +240,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				60B8892E256E834C003E93A0 /* ContentView.swift in Sources */,
-				60B8893D256E8413003E93A0 /* BenchmarkService.swift in Sources */,
+				60B8893D256E8413003E93A0 /* BenchmarkServiceWrapper.swift in Sources */,
+				603C792B25718835000EB978 /* BenchmarkScore.swift in Sources */,
 				60B8892C256E834C003E93A0 /* BenchmarkApp.swift in Sources */,
 				60A02E2D256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */,
 				60A02E34256E940A00C0E36E /* BenchmarkServiceProtocol.swift in Sources */,
+				605A74ED2571866900726107 /* BenchmarkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,10 +254,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				60B8892F256E834C003E93A0 /* ContentView.swift in Sources */,
-				60B8893E256E8413003E93A0 /* BenchmarkService.swift in Sources */,
+				60B8893E256E8413003E93A0 /* BenchmarkServiceWrapper.swift in Sources */,
+				603C792C25718835000EB978 /* BenchmarkScore.swift in Sources */,
 				60B8892D256E834C003E93A0 /* BenchmarkApp.swift in Sources */,
 				60A02E2E256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */,
 				60A02E35256E940A00C0E36E /* BenchmarkServiceProtocol.swift in Sources */,
+				605A74EE2571866900726107 /* BenchmarkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
