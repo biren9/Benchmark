@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		60A02E2D256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */; };
 		60A02E2E256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */; };
-		60A02E34256E940A00C0E36E /* BenchmarkCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E33256E940A00C0E36E /* BenchmarkCalculation.swift */; };
-		60A02E35256E940A00C0E36E /* BenchmarkCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E33256E940A00C0E36E /* BenchmarkCalculation.swift */; };
+		60A02E34256E940A00C0E36E /* BenchmarkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E33256E940A00C0E36E /* BenchmarkServiceProtocol.swift */; };
+		60A02E35256E940A00C0E36E /* BenchmarkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E33256E940A00C0E36E /* BenchmarkServiceProtocol.swift */; };
 		60B8892C256E834C003E93A0 /* BenchmarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B88919256E834A003E93A0 /* BenchmarkApp.swift */; };
 		60B8892D256E834C003E93A0 /* BenchmarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B88919256E834A003E93A0 /* BenchmarkApp.swift */; };
 		60B8892E256E834C003E93A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B8891A256E834A003E93A0 /* ContentView.swift */; };
@@ -23,7 +23,7 @@
 
 /* Begin PBXFileReference section */
 		60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculationPrime.swift; sourceTree = "<group>"; };
-		60A02E33256E940A00C0E36E /* BenchmarkCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculation.swift; sourceTree = "<group>"; };
+		60A02E33256E940A00C0E36E /* BenchmarkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkServiceProtocol.swift; sourceTree = "<group>"; };
 		60B88919256E834A003E93A0 /* BenchmarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkApp.swift; sourceTree = "<group>"; };
 		60B8891A256E834A003E93A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		60B8891B256E834C003E93A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		60A02E31256E93F800C0E36E /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				60A02E33256E940A00C0E36E /* BenchmarkCalculation.swift */,
+				60A02E33256E940A00C0E36E /* BenchmarkServiceProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -227,7 +227,7 @@
 				60B8893D256E8413003E93A0 /* BenchmarkService.swift in Sources */,
 				60B8892C256E834C003E93A0 /* BenchmarkApp.swift in Sources */,
 				60A02E2D256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */,
-				60A02E34256E940A00C0E36E /* BenchmarkCalculation.swift in Sources */,
+				60A02E34256E940A00C0E36E /* BenchmarkServiceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +239,7 @@
 				60B8893E256E8413003E93A0 /* BenchmarkService.swift in Sources */,
 				60B8892D256E834C003E93A0 /* BenchmarkApp.swift in Sources */,
 				60A02E2E256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */,
-				60A02E35256E940A00C0E36E /* BenchmarkCalculation.swift in Sources */,
+				60A02E35256E940A00C0E36E /* BenchmarkServiceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

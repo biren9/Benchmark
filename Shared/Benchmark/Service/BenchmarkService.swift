@@ -10,57 +10,83 @@ import Combine
 
 final class BenchmarkService: ObservableObject {
     @Published private(set) var progress: Double = 0
-    @Published private(set) var isRunning: Bool = false
-    @Published private(set) var numberOfCalculations: Int?
+    @Published private(set) var isRunning = false
+    @Published private(set) var score: Int?
     
-    private let duration: TimeInterval
-    private var startDate: Date?
+    private let benchmarkServices: [BenchmarkServiceProtocol]
+    private let completeDuration: TimeInterval
+    
+    private var numberOfCalculations: [Int]
+    private var serviceIndex = 0
+    private var benchmarkStartDate: Date?
+    private var serviceStartDate: Date?
     private var timer: Timer?
     
     private let feedbackQueue = DispatchQueue(label: "\(BenchmarkService.self)-feedbackQueue")
     private var operationQueue: OperationQueue?
     
     
-    init(duration: TimeInterval) {
-        self.duration = duration
+    init(benchmarkServices: [BenchmarkServiceProtocol]) {
+        self.benchmarkServices = benchmarkServices
+        numberOfCalculations = Array(repeating: 0, count: benchmarkServices.count)
+        self.completeDuration = benchmarkServices.reduce(0, { $0 + $1.duration })
     }
     
     func run() {
-        numberOfCalculations = 0
-        startDate = Date()
+        guard completeDuration > 0 else { return }
+        score = nil
+        benchmarkStartDate = Date()
+        serviceStartDate = Date()
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { [weak self] _ in
             guard let self = self else { return }
-            guard let startDate = self.startDate else { return }
-            let elapsedTimeInterval = abs(startDate.timeIntervalSinceNow)
-            self.progress = elapsedTimeInterval / self.duration
-            if elapsedTimeInterval > self.duration {
-                self.operationQueue?.cancelAllOperations()
-                self.stopOperations(progress: 1)
-            }
+            guard let benchmarkStartDate = self.benchmarkStartDate else { return }
+            self.updateTimer(benchmarkStartDate: benchmarkStartDate)
         })
         startOperations()
     }
     
     func stop() {
         stopOperations(progress: 0)
-        numberOfCalculations = nil
+        score = nil
     }
     
-    private func markAsComplete() {
+    private func updateTimer(benchmarkStartDate: Date) {
+        let elapsedBenchmarkTimeInterval = abs(benchmarkStartDate.timeIntervalSinceNow)
+        self.progress = min(elapsedBenchmarkTimeInterval / completeDuration, 1)
+        
+        let elapsedServiceTimeInterval = abs(serviceStartDate!.timeIntervalSinceNow)
+        if elapsedServiceTimeInterval > benchmarkServices[serviceIndex].duration {
+            self.operationQueue?.cancelAllOperations()
+            if benchmarkServices.count > serviceIndex+1 {
+                serviceIndex += 1
+                serviceStartDate = Date()
+            } else {
+                var score = 0
+                for (index, service) in benchmarkServices.enumerated() {
+                    score += service.generateScore(numberOfCalculations: numberOfCalculations[index])
+                }
+                self.score = score
+                self.stopOperations(progress: 1)
+            }
+        }
+    }
+    
+    private func markAsComplete(index: Int) {
         guard operationQueue != nil else { return }
         feedbackQueue.async { [weak self] in
             guard let self = self else { return }
             guard self.operationQueue != nil else { return }
             DispatchQueue.main.async {
-                guard self.operationQueue != nil, let numberOfCalculations = self.numberOfCalculations else { return }
-                self.numberOfCalculations = numberOfCalculations+1
+                guard self.operationQueue != nil else { return }
+                self.numberOfCalculations[index] += 1
             }
         }
     }
     
     private func calculation() {
-        BenchmarkCalculationPrime.calculate()
-        markAsComplete()
+        let serviceIndex = self.serviceIndex
+        benchmarkServices[serviceIndex].calculate()
+        markAsComplete(index: serviceIndex)
         if let queue = operationQueue {
             addOperation(to: queue)
         }

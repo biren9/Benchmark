@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject private var benchmarkService = BenchmarkService(duration: 30)
+    @ObservedObject private var benchmarkService = BenchmarkService( benchmarkServices: [BenchmarkCalculationPrime(), BenchmarkCalculationPrime()])
     
     func progressTitle() -> String {
-        if let numberOfCalculations = benchmarkService.numberOfCalculations {
-            return "\(numberOfCalculations)"
+        if let score = benchmarkService.score {
+            return "Score: \(score)"
         } else if benchmarkService.isRunning {
             return "\(Int(benchmarkService.progress*100))%"
         }
@@ -37,5 +37,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            
     }
 }
