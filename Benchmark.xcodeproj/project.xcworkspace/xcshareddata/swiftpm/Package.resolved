@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "BenchmarkWrapper",
+        "repositoryURL": "https://github.com/biren9/benchmarkWrapper.git",
+        "state": {
+          "branch": "main",
+          "revision": "171a92f947255e8e69c04a0eb97d0adb4532565c",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

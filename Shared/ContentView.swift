@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BenchmarkWrapper
 
 struct ContentView: View {
     @ObservedObject private var benchmarkService = BenchmarkServiceWrapper(

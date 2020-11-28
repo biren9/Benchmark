@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BenchmarkWrapper
 
 final class BenchmarkCalculationPrime: BenchmarkService {
     
@@ -31,7 +32,7 @@ final class BenchmarkCalculationPrime: BenchmarkService {
         for divider in 2..<n where n%divider == 0 {
             return false
         }
-        return true;
+        return true
     }
 }
 
@@ -62,6 +63,6 @@ final class BenchmarkCalculationPrime2: BenchmarkService {
         for divider in 2..<n where n%divider == 0 {
             return false
         }
-        return true;
+        return true
     }
 }
