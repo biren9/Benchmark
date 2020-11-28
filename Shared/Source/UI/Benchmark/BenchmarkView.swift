@@ -11,6 +11,8 @@ import BenchmarkWrapper
 struct BenchmarkView: View {
     @ObservedObject private var benchmarkService: BenchmarkServiceWrapper
     
+    @State private var isConfigurationVisible = false
+    
     init(benchmarkService: BenchmarkServiceWrapper) {
         self.benchmarkService = benchmarkService
     }
@@ -36,18 +38,35 @@ struct BenchmarkView: View {
                     Spacer()
                 }
             }
-            Button(benchmarkService.isRunning ? "Stop" : "Start") {
-                if benchmarkService.isRunning {
-                    benchmarkService.stop()
-                } else {
-                    benchmarkService.run()
+            
+            HStack(alignment: .center, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
+                Spacer()
+                Button(benchmarkService.isRunning ? "Stop" : "Start") {
+                    if benchmarkService.isRunning {
+                        benchmarkService.stop()
+                    } else {
+                        benchmarkService.run()
+                    }
                 }
-            }
+                Spacer()
+                Button("Configure") {
+                    isConfigurationVisible = true
+                }
+                .disabled(benchmarkService.isRunning)
+                .sheet(isPresented: $isConfigurationVisible, onDismiss: {
+                    isConfigurationVisible = false
+                }, content: {
+                    ConfigurationView(isPresented: $isConfigurationVisible)
+                        .frame(minWidth: 300)
+                })
+                Spacer()
+            })
         })
         .padding(20)
     }
 }
 
+#if DEBUG
 struct BenchmarkView_Previews: PreviewProvider {
     static var previews: some View {
         BenchmarkView(
@@ -57,3 +76,4 @@ struct BenchmarkView_Previews: PreviewProvider {
         )
     }
 }
+#endif
