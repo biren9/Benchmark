@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  BenchmarkView.swift
 //  Shared
 //
 //  Created by Gil Biren on 25.11.20.
@@ -8,32 +8,12 @@
 import SwiftUI
 import BenchmarkWrapper
 
-struct ContentView: View {
-    @ObservedObject private var benchmarkService = BenchmarkServiceWrapper(
-        benchmarkServiceConfigurations: [
-            BenchmarkConfiguration(
-                cpuCoreRunType: .singleCore,
-                duration: 20,
-                description: "Prime numbers singleCore",
-                serviceType: BenchmarkCalculationPrime.self,
-                qualityOfService: .userInitiated
-            ),
-            BenchmarkConfiguration(
-                cpuCoreRunType: .multiCore,
-                duration: 20,
-                description: "Prime numbers multiCore",
-                serviceType: BenchmarkCalculationPrime.self,
-                qualityOfService: .userInitiated
-            ),
-            BenchmarkConfiguration(
-                cpuCoreRunType: .singleCore,
-                duration: 20,
-                description: "Prime number n",
-                serviceType: BenchmarkCalculationPrime2.self,
-                qualityOfService: .userInitiated
-            )
-        ]
-    )
+struct BenchmarkView: View {
+    @ObservedObject private var benchmarkService: BenchmarkServiceWrapper
+    
+    init(benchmarkService: BenchmarkServiceWrapper) {
+        self.benchmarkService = benchmarkService
+    }
     
     func progressTitle() -> String {
         if benchmarkService.isRunning {
@@ -68,8 +48,12 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct BenchmarkView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        BenchmarkView(
+            benchmarkService: BenchmarkServiceWrapper(
+                benchmarkServiceConfigurations: []
+            )
+        )
     }
 }
