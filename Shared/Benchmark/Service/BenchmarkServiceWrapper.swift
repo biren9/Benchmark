@@ -77,16 +77,17 @@ final class BenchmarkServiceWrapper: ObservableObject {
     }
     
     private func generateOperations() {
+        let configuration = benchmarkServiceConfigurations[serviceIndex]
         let processorCount: Int
-        switch benchmarkServiceConfigurations[serviceIndex].cpuCoreRunType {
+        switch configuration.cpuCoreRunType {
         case .singleCore:
             processorCount = 1
         case .multiCore:
             processorCount = ProcessInfo.processInfo.processorCount
         }
         for _ in 1...processorCount {
-            let service = benchmarkServiceConfigurations[serviceIndex].serviceType.init()
-            createThread(service: service)
+            let service = configuration.serviceType.init()
+            createThread(service: service, qos: configuration.qualityOfService)
         }
     }
     
@@ -106,11 +107,12 @@ final class BenchmarkServiceWrapper: ObservableObject {
         threads = [:]
     }
     
-    private func createThread(service: BenchmarkServiceProtocol) {
+    private func createThread(service: BenchmarkServiceProtocol, qos: QualityOfService) {
         let thread = Thread {
             self.calculation(service: service)
         }
-        thread.qualityOfService = .userInitiated
+        thread.threadPriority = 1
+        thread.qualityOfService = qos
         thread.start()
         threads[thread] = service
     }

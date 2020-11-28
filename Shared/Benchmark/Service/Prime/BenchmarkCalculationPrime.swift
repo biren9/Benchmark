@@ -11,7 +11,7 @@ final class BenchmarkCalculationPrime: BenchmarkService {
     
     override func calculate() {
         calculatePrime()
-        super.calculate()
+        increaseScore()
     }
     
     private func calculatePrime() {
@@ -19,6 +19,37 @@ final class BenchmarkCalculationPrime: BenchmarkService {
         for number in 0...to {
             guard !isCancelled() else { return }
             isPrime(number)
+        }
+    }
+    
+    @discardableResult
+    private func isPrime(_ n: Int) -> Bool {
+        if n <= 1 {
+            return false
+        }
+     
+        for divider in 2..<n where n%divider == 0 {
+            return false
+        }
+        return true;
+    }
+}
+
+
+final class BenchmarkCalculationPrime2: BenchmarkService {
+    
+    override func calculate() {
+        calculatePrime()
+        super.calculate()
+    }
+    
+    private func calculatePrime() {
+        var number = 0
+        while !isCancelled() {
+            if isPrime(number) {
+                increaseScore()
+            }
+            number += 1
         }
     }
     

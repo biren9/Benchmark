@@ -13,6 +13,18 @@ class BenchmarkService: BenchmarkServiceProtocol {
     
     required init() { }
     
+    func increaseScore() {
+        semaphore.wait()
+        localScore += 1
+        semaphore.signal()
+    }
+    
+    func setScore(_ score: Int) {
+        semaphore.wait()
+        localScore = score
+        semaphore.signal()
+    }
+    
     func generateScore() -> Int {
         semaphore.wait()
         let localScore = self.localScore
@@ -22,11 +34,7 @@ class BenchmarkService: BenchmarkServiceProtocol {
     
     func cancel() { }
     
-    func calculate() {
-        semaphore.wait()
-        localScore += 1
-        semaphore.signal()
-    }
+    func calculate() { }
     
     func isCancelled() -> Bool {
         Thread.current.isCancelled

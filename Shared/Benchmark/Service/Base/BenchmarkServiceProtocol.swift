@@ -22,6 +22,7 @@ protocol BenchmarkServiceProtocol: class {
 
 protocol BenchmarkServiceConfigurationProtocol {
     var cpuCoreRunType: CpuCoreRunType { get }
+    var qualityOfService: QualityOfService { get }
     var description: String { get }
     var duration: TimeInterval { get }
     var serviceType: BenchmarkServiceProtocol.Type { get }

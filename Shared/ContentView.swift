@@ -14,13 +14,22 @@ struct ContentView: View {
                 cpuCoreRunType: .singleCore,
                 duration: 20,
                 description: "Prime numbers singleCore",
-                serviceType: BenchmarkCalculationPrime.self
+                serviceType: BenchmarkCalculationPrime.self,
+                qualityOfService: .userInitiated
             ),
             BenchmarkConfiguration(
                 cpuCoreRunType: .multiCore,
                 duration: 20,
                 description: "Prime numbers multiCore",
-                serviceType: BenchmarkCalculationPrime.self
+                serviceType: BenchmarkCalculationPrime.self,
+                qualityOfService: .userInitiated
+            ),
+            BenchmarkConfiguration(
+                cpuCoreRunType: .singleCore,
+                duration: 20,
+                description: "Prime number n",
+                serviceType: BenchmarkCalculationPrime2.self,
+                qualityOfService: .userInitiated
             )
         ]
     )
