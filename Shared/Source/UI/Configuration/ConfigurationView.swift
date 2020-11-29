@@ -6,24 +6,37 @@
 //
 
 import SwiftUI
+import BenchmarkWrapper
 
 struct ConfigurationView: View {
     @Binding var isPresented: Bool
     @State var sliderValue: Double = 20
+    @State var selectedAlgorithm: Int = 0
+    @State var selectedQualityOfService: Int = 0
+    @State var selectedCpuRunType: Int = 0
     
     var body: some View {
         VStack {
             Label("Configuration", systemImage: "gear")
                 .font(.title)
             
-            Picker(selection: .constant(1), label: Text("Algorithm")) {
-                Text("Prime numbers").tag(1)
+            Picker(selection: $selectedAlgorithm, label: Text("Algorithm")) {
+                ForEach(0..<AppConfig.algorithm.count) {
+                    Text(AppConfig.algorithm[$0].name)
+                }
+            }
+            
+            Picker(selection: $selectedQualityOfService, label: Text("Quality of service")) {
+                ForEach(0..<QualityOfService.allCases.count) {
+                    Text(QualityOfService.allCases[$0].name)
+                }
             }
             
             
-            Picker(selection: .constant(1), label: Text("CPU")) {
-                Text("single core").tag(1)
-                Text("multi core").tag(2)
+            Picker(selection: $selectedCpuRunType, label: Text("CPU")) {
+                ForEach(0..<CpuCoreRunType.allCases.count) {
+                    Text(CpuCoreRunType.allCases[$0].name)
+                }
             }
             
             Slider(value: $sliderValue, in: 0...100) {

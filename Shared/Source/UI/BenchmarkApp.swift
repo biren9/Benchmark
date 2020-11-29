@@ -11,7 +11,7 @@ import SwiftUI
 struct BenchmarkApp: App {
     var body: some Scene {
         WindowGroup {
-            BenchmarkView(benchmarkService: AppConfig.a)
+            BenchmarkView()
         }
     }
 }

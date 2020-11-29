@@ -9,16 +9,11 @@ import SwiftUI
 import BenchmarkWrapper
 
 struct BenchmarkView: View {
-    @ObservedObject private var benchmarkService: BenchmarkServiceWrapper
-    
+    @ObservedObject private var benchmarkService =  BenchmarkServiceWrapper()
     @State private var isConfigurationVisible = false
     
-    init(benchmarkService: BenchmarkServiceWrapper) {
-        self.benchmarkService = benchmarkService
-    }
-    
     func progressTitle() -> String {
-        if benchmarkService.isRunning {
+        if benchmarkService.runningState == .running {
             return "\(Int(benchmarkService.progress*100))%"
         }
         return "Benchmark"
@@ -41,18 +36,19 @@ struct BenchmarkView: View {
             
             HStack(alignment: .center, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
                 Spacer()
-                Button(benchmarkService.isRunning ? "Stop" : "Start") {
-                    if benchmarkService.isRunning {
+                Button(benchmarkService.runningState == .running ? "Stop" : "Start") {
+                    if benchmarkService.runningState == .running {
                         benchmarkService.stop()
                     } else {
                         benchmarkService.run()
                     }
                 }
+                .disabled(benchmarkService.runningState == .needConfiguration)
                 Spacer()
                 Button("Configure") {
                     isConfigurationVisible = true
                 }
-                .disabled(benchmarkService.isRunning)
+                .disabled(benchmarkService.runningState == .running)
                 .sheet(isPresented: $isConfigurationVisible, onDismiss: {
                     isConfigurationVisible = false
                 }, content: {
@@ -69,11 +65,7 @@ struct BenchmarkView: View {
 #if DEBUG
 struct BenchmarkView_Previews: PreviewProvider {
     static var previews: some View {
-        BenchmarkView(
-            benchmarkService: BenchmarkServiceWrapper(
-                benchmarkServiceConfigurations: []
-            )
-        )
+        BenchmarkView()
     }
 }
 #endif
