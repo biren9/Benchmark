@@ -9,8 +9,12 @@ import SwiftUI
 import BenchmarkWrapper
 
 struct BenchmarkView: View {
-    @ObservedObject private var benchmarkService =  BenchmarkServiceWrapper()
     @State private var isConfigurationVisible = false
+    @ObservedObject private var benchmarkService =  BenchmarkServiceWrapper()
+    @State private var cpuCoreRunType: CpuCoreRunType = .singleCore
+    @State private var duration: TimeInterval = 20
+    @State private var algortihm = AppConfig.algorithm[0]
+    @State private var qualityOfService = QualityOfService.allCases[0]
     
     func progressTitle() -> String {
         if benchmarkService.runningState == .running {
@@ -29,7 +33,7 @@ struct BenchmarkView: View {
             List(benchmarkService.scores) { item in
                 HStack {
                     Spacer()
-                    Text("\(item.name): \(item.score)")
+                    Text("\(item.name): \(Int(Double(item.score) / duration))")
                     Spacer()
                 }
             }
@@ -52,8 +56,24 @@ struct BenchmarkView: View {
                 .sheet(isPresented: $isConfigurationVisible, onDismiss: {
                     isConfigurationVisible = false
                 }, content: {
-                    ConfigurationView(isPresented: $isConfigurationVisible)
-                        .frame(minWidth: 300)
+                    ConfigurationView(
+                        isPresented: $isConfigurationVisible,
+                        cpuCoreRunType: $cpuCoreRunType,
+                        duration: $duration,
+                        algortihm: $algortihm,
+                        qualityOfService: $qualityOfService,
+                        onDone: {
+                            let configuration = BenchmarkConfiguration(
+                                cpuCoreRunType: cpuCoreRunType,
+                                duration: duration,
+                                description: "--",
+                                serviceType: algortihm.type.type,
+                                qualityOfService: qualityOfService
+                            )
+                            benchmarkService.setConfigurations(configuration)
+                        }
+                    )
+                    .frame(minWidth: 300)
                 })
                 Spacer()
             })

@@ -9,47 +9,48 @@ import SwiftUI
 import BenchmarkWrapper
 
 struct ConfigurationView: View {
-    @Binding var isPresented: Bool
-    @State var sliderValue: Double = 20
-    @State var selectedAlgorithm: Int = 0
-    @State var selectedQualityOfService: Int = 0
-    @State var selectedCpuRunType: Int = 0
+    @Binding private(set) var isPresented: Bool
+    @Binding private(set) var cpuCoreRunType: CpuCoreRunType
+    @Binding private(set) var duration: TimeInterval
+    @Binding private(set) var algortihm: Algortihm
+    @Binding private(set) var qualityOfService: QualityOfService
+    var onDone: (() -> Void)?
     
     var body: some View {
         VStack {
             Label("Configuration", systemImage: "gear")
                 .font(.title)
             
-            Picker(selection: $selectedAlgorithm, label: Text("Algorithm")) {
-                ForEach(0..<AppConfig.algorithm.count) {
-                    Text(AppConfig.algorithm[$0].name)
+            Picker(selection: $algortihm, label: Text("Algorithm")) {
+                ForEach(AppConfig.algorithm, id: \.self) {
+                    Text($0.name)
                 }
             }
             
-            Picker(selection: $selectedQualityOfService, label: Text("Quality of service")) {
-                ForEach(0..<QualityOfService.allCases.count) {
-                    Text(QualityOfService.allCases[$0].name)
+            Picker(selection: $qualityOfService, label: Text("Quality of service")) {
+                ForEach(QualityOfService.allCases, id: \.self) {
+                    Text($0.name)
                 }
             }
             
             
-            Picker(selection: $selectedCpuRunType, label: Text("CPU")) {
-                ForEach(0..<CpuCoreRunType.allCases.count) {
-                    Text(CpuCoreRunType.allCases[$0].name)
+            Picker(selection: $cpuCoreRunType, label: Text("CPU")) {
+                ForEach(CpuCoreRunType.allCases, id: \.self) {
+                    Text($0.name)
                 }
             }
             
-            Slider(value: $sliderValue, in: 0...100) {
-                Text("Duration: \(formatteDuration(sliderValue))")
+            Slider(value: $duration, in: 0...100) {
+                Text("Duration: \(formatteDuration(duration))")
             }
             Button("Done") {
+                onDone?()
                 isPresented = false
             }
         }.padding()
     }
     
-    
-    func formatteDuration(_ number: Double) -> String {
+    private func formatteDuration(_ number: Double) -> String {
         let formatter = MeasurementFormatter()
         let measurement = Measurement(value: number, unit: UnitDuration.seconds)
         return formatter.string(from: measurement)
@@ -59,7 +60,13 @@ struct ConfigurationView: View {
 #if DEBUG
 struct ConfigurationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfigurationView(isPresented: .constant(true))
+        ConfigurationView(
+            isPresented: .constant(true),
+            cpuCoreRunType: .constant(.singleCore),
+            duration: .constant(20),
+            algortihm: .constant(AppConfig.algorithm[0]),
+            qualityOfService: .constant(.default)
+        )
     }
 }
 #endif
