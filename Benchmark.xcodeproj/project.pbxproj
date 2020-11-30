@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6078F25225751C620033537E /* BenchmarkCalculationAES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078F25125751C620033537E /* BenchmarkCalculationAES.swift */; };
+		6078F25325751C620033537E /* BenchmarkCalculationAES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078F25125751C620033537E /* BenchmarkCalculationAES.swift */; };
 		60A02E2D256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */; };
 		60A02E2E256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */; };
 		60A0D2382572B310002E45FD /* BenchmarkWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 60A0D2372572B310002E45FD /* BenchmarkWrapper */; };
@@ -24,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6078F25125751C620033537E /* BenchmarkCalculationAES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculationAES.swift; sourceTree = "<group>"; };
 		60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculationPrime.swift; sourceTree = "<group>"; };
 		60A0D2492572CCEE002E45FD /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		60AF46A32572CE3100EDCC9C /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */,
+				6078F25125751C620033537E /* BenchmarkCalculationAES.swift */,
 			);
 			path = Benchmark;
 			sourceTree = "<group>";
@@ -278,6 +282,7 @@
 			files = (
 				60B8892E256E834C003E93A0 /* BenchmarkView.swift in Sources */,
 				60AF46A42572CE3100EDCC9C /* ConfigurationView.swift in Sources */,
+				6078F25225751C620033537E /* BenchmarkCalculationAES.swift in Sources */,
 				60A0D24A2572CCEE002E45FD /* AppConfig.swift in Sources */,
 				60B8892C256E834C003E93A0 /* BenchmarkApp.swift in Sources */,
 				60A02E2D256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */,
@@ -290,6 +295,7 @@
 			files = (
 				60B8892F256E834C003E93A0 /* BenchmarkView.swift in Sources */,
 				60AF46A92572CEA000EDCC9C /* ConfigurationView.swift in Sources */,
+				6078F25325751C620033537E /* BenchmarkCalculationAES.swift in Sources */,
 				60A0D24F2572CD79002E45FD /* AppConfig.swift in Sources */,
 				60B8892D256E834C003E93A0 /* BenchmarkApp.swift in Sources */,
 				60A02E2E256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */,

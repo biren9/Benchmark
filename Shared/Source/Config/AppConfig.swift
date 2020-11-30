@@ -10,6 +10,7 @@ import BenchmarkWrapper
 
 enum AvailableAlgortihm: CaseIterable, Identifiable {
     case prime
+    case aes
     
     public var id: UUID { UUID() }
     
@@ -17,6 +18,8 @@ enum AvailableAlgortihm: CaseIterable, Identifiable {
         switch self {
         case .prime:
             return Algortihm(name: "Prime", type: BenchmarkCalculationPrime.self)
+        case .aes:
+            return Algortihm(name: "AES encrypt / decrypt", type: BenchmarkCalculationAES.self)
         }
     }
 }
@@ -29,7 +32,7 @@ extension QualityOfService: Identifiable {
     public var id: UUID { UUID() }
     
     static var allCases: [QualityOfService] {
-        [.utility, .background, .default, .userInitiated, .userInteractive]
+        [.default, .background, .utility, .userInitiated, .userInteractive]
     }
     
     var name: String {
