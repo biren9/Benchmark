@@ -12,7 +12,7 @@ struct ConfigurationView: View {
     @Binding private(set) var isPresented: Bool
     @Binding private(set) var cpuCoreRunType: CpuCoreRunType
     @Binding private(set) var duration: TimeInterval
-    @Binding private(set) var algortihm: Algortihm
+    @Binding private(set) var algortihm: AvailableAlgortihm
     @Binding private(set) var qualityOfService: QualityOfService
     var onDone: (() -> Void)?
     
@@ -22,8 +22,8 @@ struct ConfigurationView: View {
                 .font(.title)
             
             Picker(selection: $algortihm, label: Text("Algorithm")) {
-                ForEach(AppConfig.algorithm, id: \.self) {
-                    Text($0.name)
+                ForEach(AvailableAlgortihm.allCases, id: \.self) {
+                    Text($0.algortihm.name)
                 }
             }
             

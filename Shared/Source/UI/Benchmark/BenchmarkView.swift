@@ -13,8 +13,8 @@ struct BenchmarkView: View {
     @ObservedObject private var benchmarkService =  BenchmarkServiceWrapper()
     @State private var cpuCoreRunType: CpuCoreRunType = .singleCore
     @State private var duration: TimeInterval = 20
-    @State private var algortihm = AppConfig.algorithm[0]
-    @State private var qualityOfService = QualityOfService.allCases[0]
+    @State private var algortihm: AvailableAlgortihm = .prime
+    @State private var qualityOfService: QualityOfService = .utility
     
     func progressTitle() -> String {
         if benchmarkService.runningState == .running {
@@ -31,11 +31,7 @@ struct BenchmarkView: View {
                 Spacer(minLength: 60)
             })
             List(benchmarkService.scores) { item in
-                HStack {
-                    Spacer()
-                    Text("\(item.name): \(Int(Double(item.score) / duration))")
-                    Spacer()
-                }
+                scoreView(item)
             }
             
             HStack(alignment: .center, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
@@ -72,14 +68,22 @@ struct BenchmarkView: View {
         .padding(20)
     }
     
+    private func scoreView(_ score: BenchmarkScore) -> some View {
+        HStack {
+            Spacer()
+            Text("\(score.configuration.algorithm.name) - \(score.configuration.cpuCoreRunType.name) - \(qualityOfService.name) Score: \(Int(Double(score.score).rounded() / duration))")
+            Spacer()
+        }
+    }
+    
     private func setConfiguration() {
         let configuration = BenchmarkConfiguration(
+            qualityOfService: qualityOfService,
+            algorithm: algortihm.algortihm,
             cpuCoreRunType: cpuCoreRunType,
-            duration: duration,
-            description: "--",
-            serviceType: algortihm.type.type,
-            qualityOfService: qualityOfService
+            duration: duration
         )
+        benchmarkService.stop()
         benchmarkService.setConfigurations(configuration)
     }
 }

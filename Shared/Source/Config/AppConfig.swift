@@ -8,23 +8,18 @@
 import Foundation
 import BenchmarkWrapper
 
-struct Algortihm: Hashable, Identifiable {
-    let id = UUID()
-    let type: AvailableAlgortihm
-    let name: String
-}
-
-enum AvailableAlgortihm {
+enum AvailableAlgortihm: CaseIterable, Identifiable {
     case prime
     
-    var type: BenchmarkServiceProtocol.Type {
+    public var id: UUID { UUID() }
+    
+    var algortihm: Algortihm {
         switch self {
         case .prime:
-            return BenchmarkCalculationPrime.self
+            return Algortihm(name: "Prime", type: BenchmarkCalculationPrime.self)
         }
     }
 }
-
 
 extension CpuCoreRunType: Identifiable {
     public var id: UUID { UUID() }
@@ -72,7 +67,6 @@ extension CpuCoreRunType {
 
 class AppConfig {
     static let algorithm = [
-        Algortihm(type: .prime, name: "Prime"),
-        Algortihm(type: .prime, name: "Prime 2")
+        AvailableAlgortihm.prime.algortihm
     ]
 }
