@@ -40,9 +40,11 @@ struct ConfigurationView: View {
                 }
             }
             
-            Slider(value: $duration, in: 0...100) {
+            VStack(alignment: .leading, spacing: nil, content: {
+                Spacer(minLength: 30)
                 Text("Duration: \(formatteDuration(duration))")
-            }
+                Slider(value: $duration, in: 0...100)
+            })
             Button("Done") {
                 onDone?()
                 isPresented = false

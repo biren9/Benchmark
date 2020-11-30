@@ -62,16 +62,7 @@ struct BenchmarkView: View {
                         duration: $duration,
                         algortihm: $algortihm,
                         qualityOfService: $qualityOfService,
-                        onDone: {
-                            let configuration = BenchmarkConfiguration(
-                                cpuCoreRunType: cpuCoreRunType,
-                                duration: duration,
-                                description: "--",
-                                serviceType: algortihm.type.type,
-                                qualityOfService: qualityOfService
-                            )
-                            benchmarkService.setConfigurations(configuration)
-                        }
+                        onDone: setConfiguration
                     )
                     .frame(minWidth: 300)
                 })
@@ -79,6 +70,17 @@ struct BenchmarkView: View {
             })
         })
         .padding(20)
+    }
+    
+    private func setConfiguration() {
+        let configuration = BenchmarkConfiguration(
+            cpuCoreRunType: cpuCoreRunType,
+            duration: duration,
+            description: "--",
+            serviceType: algortihm.type.type,
+            qualityOfService: qualityOfService
+        )
+        benchmarkService.setConfigurations(configuration)
     }
 }
 
