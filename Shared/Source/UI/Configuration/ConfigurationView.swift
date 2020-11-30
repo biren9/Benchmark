@@ -14,6 +14,7 @@ struct ConfigurationView: View {
     @Binding private(set) var duration: TimeInterval
     @Binding private(set) var algortihm: AvailableAlgortihm
     @Binding private(set) var qualityOfService: QualityOfService
+    @Binding private(set) var stressTest: Bool
     var onDone: (() -> Void)?
     
     var body: some View {
@@ -33,23 +34,29 @@ struct ConfigurationView: View {
                 }
             }
             
-            
             Picker(selection: $cpuCoreRunType, label: Text("CPU")) {
                 ForEach(CpuCoreRunType.allCases, id: \.self) {
                     Text($0.name)
                 }
             }
             
-            VStack(alignment: .leading, spacing: nil, content: {
-                Spacer(minLength: 30)
-                Text("Duration: \(formatteDuration(duration))")
-                Slider(value: $duration, in: 1...60, step: 1)
-            })
+            HStack {
+                VStack(alignment: .leading, spacing: nil, content: {
+                    Text("Duration: \(formatteDuration(duration))")
+                    Slider(value: $duration, in: 1...60, step: 1)
+                        .disabled(stressTest)
+                })
+                Toggle(isOn: $stressTest) {
+                    Text("Stress Test")
+                }
+            }
+            
             Button("Done") {
                 onDone?()
                 isPresented = false
             }
-        }.padding()
+        }
+        .padding()
     }
     
     private func formatteDuration(_ number: Double) -> String {
@@ -67,7 +74,8 @@ struct ConfigurationView_Previews: PreviewProvider {
             cpuCoreRunType: .constant(.singleCore),
             duration: .constant(20),
             algortihm: .constant(AvailableAlgortihm.aes),
-            qualityOfService: .constant(.default)
+            qualityOfService: .constant(.default),
+            stressTest: .constant(false)
         )
     }
 }

@@ -15,6 +15,7 @@ struct BenchmarkView: View {
     @State private var duration: TimeInterval = 20
     @State private var algortihm: AvailableAlgortihm = .prime
     @State private var qualityOfService: QualityOfService = .utility
+    @State private var stressTest: Bool = false
     
     init() {
         setConfiguration()
@@ -62,6 +63,7 @@ struct BenchmarkView: View {
                         duration: $duration,
                         algortihm: $algortihm,
                         qualityOfService: $qualityOfService,
+                        stressTest: $stressTest,
                         onDone: setConfiguration
                     )
                     .frame(minWidth: 300)
@@ -77,7 +79,7 @@ struct BenchmarkView: View {
             qualityOfService: qualityOfService,
             algorithm: algortihm.algortihm,
             cpuCoreRunType: cpuCoreRunType,
-            duration: duration
+            duration: stressTest ? .infinity : duration
         )
         benchmarkService.stop()
         benchmarkService.setConfigurations(configuration)
