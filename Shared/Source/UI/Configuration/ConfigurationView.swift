@@ -43,7 +43,7 @@ struct ConfigurationView: View {
             VStack(alignment: .leading, spacing: nil, content: {
                 Spacer(minLength: 30)
                 Text("Duration: \(formatteDuration(duration))")
-                Slider(value: $duration, in: 0...100)
+                Slider(value: $duration, in: 1...60, step: 1)
             })
             Button("Done") {
                 onDone?()
@@ -66,7 +66,7 @@ struct ConfigurationView_Previews: PreviewProvider {
             isPresented: .constant(true),
             cpuCoreRunType: .constant(.singleCore),
             duration: .constant(20),
-            algortihm: .constant(AppConfig.algorithm[0]),
+            algortihm: .constant(AvailableAlgortihm.aes),
             qualityOfService: .constant(.default)
         )
     }

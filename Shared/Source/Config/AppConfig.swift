@@ -17,7 +17,7 @@ enum AvailableAlgortihm: CaseIterable, Identifiable {
     var algortihm: Algortihm {
         switch self {
         case .prime:
-            return Algortihm(name: "Prime", type: BenchmarkCalculationPrime.self)
+            return Algortihm(name: "Prime numbers from 0 to 2^12", type: BenchmarkCalculationPrime.self)
         case .aes:
             return Algortihm(name: "AES encrypt / decrypt", type: BenchmarkCalculationAES.self)
         }

@@ -16,6 +16,10 @@ struct BenchmarkView: View {
     @State private var algortihm: AvailableAlgortihm = .prime
     @State private var qualityOfService: QualityOfService = .utility
     
+    init() {
+        setConfiguration()
+    }
+    
     func progressTitle() -> String {
         if benchmarkService.runningState == .running {
             return "\(Int(benchmarkService.progress*100))%"
@@ -31,7 +35,7 @@ struct BenchmarkView: View {
                 Spacer(minLength: 60)
             })
             List(benchmarkService.scores) { item in
-                scoreView(item)
+                ScoreView(score: item)
             }
             
             HStack(alignment: .center, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
@@ -67,15 +71,7 @@ struct BenchmarkView: View {
         })
         .padding(20)
     }
-    
-    private func scoreView(_ score: BenchmarkScore) -> some View {
-        HStack {
-            Spacer()
-            Text("\(score.configuration.algorithm.name) - \(score.configuration.cpuCoreRunType.name) - \(qualityOfService.name) Score: \(Int(Double(score.score).rounded() / duration))")
-            Spacer()
-        }
-    }
-    
+
     private func setConfiguration() {
         let configuration = BenchmarkConfiguration(
             qualityOfService: qualityOfService,
