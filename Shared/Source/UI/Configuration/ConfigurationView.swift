@@ -15,54 +15,23 @@ struct ConfigurationView: View {
     @Binding private(set) var algortihm: AvailableAlgortihm
     @Binding private(set) var qualityOfService: QualityOfService
     @Binding private(set) var isStressTest: Bool
-    var onDone: (() -> Void)?
+    private(set) var onDone: (() -> Void)?
     
     var body: some View {
         VStack {
-            Label("Configuration", systemImage: "gear")
-                .font(.title)
-            
-            Picker(selection: $algortihm, label: Text("Algorithm")) {
-                ForEach(AvailableAlgortihm.allCases, id: \.self) {
-                    Text($0.algortihm.name)
-                }
-            }
-            
-            Picker(selection: $qualityOfService, label: Text("Quality of service")) {
-                ForEach(QualityOfService.allCases, id: \.self) {
-                    Text($0.name)
-                }
-            }
-            
-            Picker(selection: $cpuCoreRunType, label: Text("CPU")) {
-                ForEach(CpuCoreRunType.allCases, id: \.self) {
-                    Text($0.name)
-                }
-            }
-            
-            HStack {
-                VStack(alignment: .leading, spacing: nil, content: {
-                    Text("Duration: \(formatteDuration(duration))")
-                    Slider(value: $duration, in: 1...60, step: 1)
-                        .disabled(isStressTest)
-                })
-                Toggle(isOn: $isStressTest) {
-                    Text("Stress Test")
-                }
-            }
-            
+            ConfigurationContentView(
+                cpuCoreRunType: $cpuCoreRunType,
+                duration: $duration,
+                algortihm: $algortihm,
+                qualityOfService: $qualityOfService,
+                isStressTest: $isStressTest
+            )
             Button("Done") {
                 onDone?()
                 isPresented = false
             }
         }
         .padding()
-    }
-    
-    private func formatteDuration(_ number: Double) -> String {
-        let formatter = MeasurementFormatter()
-        let measurement = Measurement(value: number, unit: UnitDuration.seconds)
-        return formatter.string(from: measurement)
     }
 }
 
