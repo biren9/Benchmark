@@ -14,7 +14,7 @@ struct ConfigurationView: View {
     @Binding private(set) var duration: TimeInterval
     @Binding private(set) var algortihm: AvailableAlgortihm
     @Binding private(set) var qualityOfService: QualityOfService
-    @Binding private(set) var stressTest: Bool
+    @Binding private(set) var isStressTest: Bool
     var onDone: (() -> Void)?
     
     var body: some View {
@@ -44,9 +44,9 @@ struct ConfigurationView: View {
                 VStack(alignment: .leading, spacing: nil, content: {
                     Text("Duration: \(formatteDuration(duration))")
                     Slider(value: $duration, in: 1...60, step: 1)
-                        .disabled(stressTest)
+                        .disabled(isStressTest)
                 })
-                Toggle(isOn: $stressTest) {
+                Toggle(isOn: $isStressTest) {
                     Text("Stress Test")
                 }
             }
@@ -75,7 +75,7 @@ struct ConfigurationView_Previews: PreviewProvider {
             duration: .constant(20),
             algortihm: .constant(AvailableAlgortihm.aes),
             qualityOfService: .constant(.default),
-            stressTest: .constant(false)
+            isStressTest: .constant(false)
         )
     }
 }
