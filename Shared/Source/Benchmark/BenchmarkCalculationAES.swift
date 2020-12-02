@@ -14,6 +14,7 @@ final class BenchmarkCalculationAES: BenchmarkService {
     private let messageData = String.random(length: 5000).data(using: .utf8)!
     
     override func calculate() {
+        super.calculate()
         if decryptEncrypt() {
             increaseScore()
         }

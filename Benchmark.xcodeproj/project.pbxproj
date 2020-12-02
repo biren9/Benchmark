@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		601BC8112576C99C0028CA8F /* ConfigurationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601BC8102576C99C0028CA8F /* ConfigurationSelectionView.swift */; };
+		6034B2E5257843870077774F /* DispatchTimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034B2E4257843870077774F /* DispatchTimeInterval+Extensions.swift */; };
+		6034B2EA2578439F0077774F /* DispatchTimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034B2E4257843870077774F /* DispatchTimeInterval+Extensions.swift */; };
 		6078F25225751C620033537E /* BenchmarkCalculationAES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078F25125751C620033537E /* BenchmarkCalculationAES.swift */; };
 		6078F25325751C620033537E /* BenchmarkCalculationAES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078F25125751C620033537E /* BenchmarkCalculationAES.swift */; };
 		6078F259257530B10033537E /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078F258257530B10033537E /* ScoreView.swift */; };
@@ -32,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		601BC8102576C99C0028CA8F /* ConfigurationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationSelectionView.swift; sourceTree = "<group>"; };
+		6034B2E4257843870077774F /* DispatchTimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchTimeInterval+Extensions.swift"; sourceTree = "<group>"; };
 		6078F25125751C620033537E /* BenchmarkCalculationAES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculationAES.swift; sourceTree = "<group>"; };
 		6078F258257530B10033537E /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculationPrime.swift; sourceTree = "<group>"; };
@@ -69,6 +72,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6034B2E3257843720077774F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6034B2E4257843870077774F /* DispatchTimeInterval+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		60A02E2B256E91E000C0E36E /* Benchmark */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +99,7 @@
 		60A0D2422572CC4A002E45FD /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				6034B2E3257843720077774F /* Extensions */,
 				60D56BE925766AD60027DFEA /* Helper */,
 				60A0D2482572CCE0002E45FD /* Config */,
 				60A0D2442572CC6F002E45FD /* UI */,
@@ -332,6 +344,7 @@
 				60A0D24A2572CCEE002E45FD /* AppConfig.swift in Sources */,
 				6078F259257530B10033537E /* ScoreView.swift in Sources */,
 				60B8892C256E834C003E93A0 /* BenchmarkApp.swift in Sources */,
+				6034B2E5257843870077774F /* DispatchTimeInterval+Extensions.swift in Sources */,
 				60A02E2D256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */,
 				60D56BDE257668870027DFEA /* ConfigurationView.swift in Sources */,
 			);
@@ -343,6 +356,7 @@
 			files = (
 				60D56BEB25766AEC0027DFEA /* FormatterHelper.swift in Sources */,
 				60B8892F256E834C003E93A0 /* BenchmarkView.swift in Sources */,
+				6034B2EA2578439F0077774F /* DispatchTimeInterval+Extensions.swift in Sources */,
 				6078F25325751C620033537E /* BenchmarkCalculationAES.swift in Sources */,
 				60A0D24F2572CD79002E45FD /* AppConfig.swift in Sources */,
 				6078F25A257530B10033537E /* ScoreView.swift in Sources */,

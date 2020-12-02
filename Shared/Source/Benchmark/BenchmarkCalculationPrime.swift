@@ -11,6 +11,7 @@ import BenchmarkWrapper
 final class BenchmarkCalculationPrime: BenchmarkService {
     
     override func calculate() {
+        super.calculate()
         calculatePrime()
         increaseScore()
     }

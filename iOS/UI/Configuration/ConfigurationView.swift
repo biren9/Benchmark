@@ -41,18 +41,20 @@ struct ConfigurationView: View {
             VStack(alignment: .center, spacing: nil) {
                 List(ListElement.allCases) { item in
                     VStack {
-                        NavigationLink(destination: ConfigurationSelectionView(
-                                        listElement: item,
-                                        cpuCoreRunType: $cpuCoreRunType,
-                                        algortihm: $algortihm,
-                                        qualityOfService: $qualityOfService)) {
+                        NavigationLink(
+                            destination: ConfigurationSelectionView(
+                                listElement: item,
+                                cpuCoreRunType: $cpuCoreRunType,
+                                algortihm: $algortihm,
+                                qualityOfService: $qualityOfService)) {
                             listLabel(item)
-                        }.navigationTitle(Text("Configuration"))
+                        }
+                        .navigationTitle(Text("Configuration"))
                     }
                 }
 
                 Text("Duration: \(FormatterHelper.formatteDuration(duration))")
-                Slider(value: $duration, in: 1...60, step: 1)
+                Slider(value: $duration, in: 5...60, step: 5)
                     .disabled(isStressTest)
                 
                 Toggle(isOn: $isStressTest) {
@@ -63,9 +65,8 @@ struct ConfigurationView: View {
                     onDone?()
                     isPresented = false
                 }
-            }
+            }.padding(20)
         }
-        .padding()
     }
     
     func listLabel(_ element: ListElement) -> some View {

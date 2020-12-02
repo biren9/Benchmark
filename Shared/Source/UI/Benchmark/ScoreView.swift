@@ -21,7 +21,7 @@ struct ScoreView: View {
             }
             .font(.title3)
             Spacer()
-            Label("\(Int(Double(score.score).rounded() / score.configuration.duration))", systemImage: "rosette")
+            Label("\(Int(Double(score.score).rounded() / Double(score.configuration.duration.seconds)))", systemImage: "rosette")
                 .font(.title)
             Spacer()
         })
@@ -38,7 +38,7 @@ struct ScoreView_Previews: PreviewProvider {
                     qualityOfService: .utility,
                     algorithm: AvailableAlgortihm.aes.algortihm,
                     cpuCoreRunType: .multiCore,
-                    duration: 20
+                    duration: .seconds(10)
                 )
             )
         )

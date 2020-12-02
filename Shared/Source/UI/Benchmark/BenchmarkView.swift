@@ -11,9 +11,9 @@ import BenchmarkWrapper
 struct BenchmarkView: View {
     @State private var isConfigurationVisible = false
     @ObservedObject private var benchmarkService =  BenchmarkServiceWrapper()
-    @State private var cpuCoreRunType: CpuCoreRunType = .singleCore
-    @State private var duration: TimeInterval = 20
-    @State private var algortihm: AvailableAlgortihm = .prime
+    @State private var cpuCoreRunType: CpuCoreRunType = .multiCore
+    @State private var duration: TimeInterval = 10
+    @State private var algortihm: AvailableAlgortihm = .aes
     @State private var qualityOfService: QualityOfService = .utility
     @State private var isStressTest: Bool = false
     
@@ -35,9 +35,7 @@ struct BenchmarkView: View {
                 ProgressView(progressTitle(), value: benchmarkService.progress, total: 1)
                 Spacer(minLength: 60)
             })
-            List(benchmarkService.scores) { item in
-                ScoreView(score: item)
-            }
+            benchmarkService.score.map { ScoreView(score: $0) }
             
             HStack(alignment: .center, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
                 Spacer()
@@ -79,10 +77,10 @@ struct BenchmarkView: View {
             qualityOfService: qualityOfService,
             algorithm: algortihm.algortihm,
             cpuCoreRunType: cpuCoreRunType,
-            duration: isStressTest ? .infinity : duration
+            duration: isStressTest ? .never : .seconds(Int(duration))
         )
         benchmarkService.stop()
-        benchmarkService.setConfigurations(configuration)
+        benchmarkService.setConfiguration(configuration)
     }
 }
 
