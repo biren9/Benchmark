@@ -30,9 +30,9 @@ enum ListElement: Identifiable, CaseIterable {
 struct ConfigurationView: View {
     @Binding private(set) var isPresented: Bool
     @Binding private(set) var cpuCoreRunType: CpuCoreRunType
-    @Binding private(set) var duration: TimeInterval
     @Binding private(set) var algortihm: AvailableAlgortihm
     @Binding private(set) var qualityOfService: QualityOfService
+    @Binding private(set) var duration: TimeInterval
     @Binding private(set) var isStressTest: Bool
     private(set) var onDone: (() -> Void)?
     
@@ -41,7 +41,11 @@ struct ConfigurationView: View {
             VStack(alignment: .center, spacing: nil) {
                 List(ListElement.allCases) { item in
                     VStack {
-                        NavigationLink(destination: ConfigurationSelectionView(listElement: item)) {
+                        NavigationLink(destination: ConfigurationSelectionView(
+                                        listElement: item,
+                                        cpuCoreRunType: $cpuCoreRunType,
+                                        algortihm: $algortihm,
+                                        qualityOfService: $qualityOfService)) {
                             listLabel(item)
                         }.navigationTitle(Text("Configuration"))
                     }
@@ -82,9 +86,9 @@ struct ConfigurationView_Previews: PreviewProvider {
         ConfigurationView(
             isPresented: .constant(true),
             cpuCoreRunType: .constant(.multiCore),
-            duration: .constant(20),
             algortihm: .constant(.aes),
             qualityOfService: .constant(.utility),
+            duration: .constant(20),
             isStressTest: .constant(true)
         )
         .preferredColorScheme(.dark)

@@ -60,9 +60,9 @@ struct BenchmarkView: View {
                     ConfigurationView(
                         isPresented: $isConfigurationVisible,
                         cpuCoreRunType: $cpuCoreRunType,
-                        duration: $duration,
                         algortihm: $algortihm,
                         qualityOfService: $qualityOfService,
+                        duration: $duration,
                         isStressTest: $isStressTest,
                         onDone: setConfiguration
                     )
