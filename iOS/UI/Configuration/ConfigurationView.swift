@@ -20,9 +20,9 @@ enum ListElement: Identifiable, CaseIterable {
         case .algortihm:
             return "Algorithm"
         case .cpuCoreRunType:
-            return "cpuCoreRunType"
+            return "CPU"
         case .qualityOfService:
-            return "qualityOfService"
+            return "QualityOfService"
         }
     }
 }
@@ -40,9 +40,11 @@ struct ConfigurationView: View {
         NavigationView {
             VStack(alignment: .center, spacing: nil) {
                 List(ListElement.allCases) { item in
-                    NavigationLink(destination: ConfigurationSelectionView(listElement: item)) {
-                        Text(item.title)
-                    }.navigationTitle(Text("Configuration"))
+                    VStack {
+                        NavigationLink(destination: ConfigurationSelectionView(listElement: item)) {
+                            listLabel(item)
+                        }.navigationTitle(Text("Configuration"))
+                    }
                 }
 
                 Text("Duration: \(FormatterHelper.formatteDuration(duration))")
@@ -60,6 +62,17 @@ struct ConfigurationView: View {
             }
         }
         .padding()
+    }
+    
+    func listLabel(_ element: ListElement) -> some View {
+        switch element {
+        case .algortihm:
+            return Label(algortihm.algortihm.name, systemImage: "skew")
+        case .cpuCoreRunType:
+            return Label(cpuCoreRunType.name, systemImage: "cpu")
+        case .qualityOfService:
+            return Label(qualityOfService.name, systemImage: "speedometer")
+        }
     }
 }
 
