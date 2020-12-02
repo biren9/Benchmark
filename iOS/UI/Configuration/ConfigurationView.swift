@@ -72,8 +72,9 @@ struct ConfigurationView_Previews: PreviewProvider {
             duration: .constant(20),
             algortihm: .constant(.aes),
             qualityOfService: .constant(.utility),
-            isStressTest: .constant(false)
+            isStressTest: .constant(true)
         )
+        .preferredColorScheme(.dark)
     }
 }
 #endif
