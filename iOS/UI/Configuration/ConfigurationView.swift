@@ -49,11 +49,11 @@ struct ConfigurationView: View {
     func listLabel(_ element: ListElement) -> some View {
         switch element {
         case .algortihm:
-            return Label(configuration.algortihm.algortihm.name, systemImage: "skew")
+            return Label(configuration.algortihm.algortihm.name, systemImage: element.imageName)
         case .cpuCoreRunType:
-            return Label(configuration.cpuCoreRunType.name, systemImage: "cpu")
+            return Label(configuration.cpuCoreRunType.name, systemImage: element.imageName)
         case .qualityOfService:
-            return Label(configuration.qualityOfService.name, systemImage: "speedometer")
+            return Label(configuration.qualityOfService.name, systemImage: element.imageName)
         }
     }
 }

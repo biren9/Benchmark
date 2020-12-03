@@ -7,7 +7,13 @@
 
 import Foundation
 
-enum ListElement: Identifiable, CaseIterable {
+protocol UIRepresentable {
+    var title: String { get }
+    var imageName: String { get }
+}
+
+
+enum ListElement: Identifiable, CaseIterable, UIRepresentable {
     case cpuCoreRunType
     case algortihm
     case qualityOfService
@@ -22,6 +28,17 @@ enum ListElement: Identifiable, CaseIterable {
             return "CPU"
         case .qualityOfService:
             return "QualityOfService"
+        }
+    }
+    
+    var imageName: String {
+        switch self {
+        case .algortihm:
+            return "skew"
+        case .cpuCoreRunType:
+            return "cpu"
+        case .qualityOfService:
+            return "speedometer"
         }
     }
 }

@@ -15,9 +15,9 @@ struct ScoreView: View {
         HStack(alignment: .center, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
             Spacer()
             VStack(alignment: .leading, spacing: nil) {
-                Label(score.configuration.algorithm.name, systemImage: "skew")
-                Label(score.configuration.cpuCoreRunType.name, systemImage: "cpu")
-                Label(score.configuration.qualityOfService.name, systemImage: "speedometer")
+                Label(score.configuration.algorithm.name, systemImage: ListElement.algortihm.imageName)
+                Label(score.configuration.cpuCoreRunType.name, systemImage: ListElement.cpuCoreRunType.imageName)
+                Label(score.configuration.qualityOfService.name, systemImage: ListElement.qualityOfService.imageName)
             }
             .font(.title3)
             Spacer()
