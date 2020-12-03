@@ -33,7 +33,9 @@ struct ConfigurationView: View {
                     }
                 }
 
-                Text("Duration: \(FormatterHelper.formatteDuration(configuration.duration))")
+                Text( "Duration: " + (configuration.isStressTest ?
+                        "∞" : "\(FormatterHelper.formatteDuration(configuration.duration))")
+                )
                 Slider(value: $configuration.duration, in: 5...60, step: 5)
                     .disabled(configuration.isStressTest)
                 

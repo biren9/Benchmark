@@ -27,7 +27,7 @@ enum ListElement: Identifiable, CaseIterable, UIRepresentable {
         case .cpuCoreRunType:
             return "CPU"
         case .qualityOfService:
-            return "QualityOfService"
+            return "Quality of service"
         }
     }
     

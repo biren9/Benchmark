@@ -75,9 +75,3 @@ extension QualityOfService: Identifiable, Listable {
         }
     }
 }
-
-class AppConfig {
-    static let algorithm = [
-        AvailableAlgortihm.prime.algortihm
-    ]
-}

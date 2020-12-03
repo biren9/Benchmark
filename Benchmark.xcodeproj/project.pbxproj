@@ -18,8 +18,8 @@
 		60A02E2E256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */; };
 		60A0D2382572B310002E45FD /* BenchmarkWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 60A0D2372572B310002E45FD /* BenchmarkWrapper */; };
 		60A0D23D2572B321002E45FD /* BenchmarkWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 60A0D23C2572B321002E45FD /* BenchmarkWrapper */; };
-		60A0D24A2572CCEE002E45FD /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0D2492572CCEE002E45FD /* AppConfig.swift */; };
-		60A0D24F2572CD79002E45FD /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0D2492572CCEE002E45FD /* AppConfig.swift */; };
+		60A0D24A2572CCEE002E45FD /* BenchmarkWrapper+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0D2492572CCEE002E45FD /* BenchmarkWrapper+Extensions.swift */; };
+		60A0D24F2572CD79002E45FD /* BenchmarkWrapper+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0D2492572CCEE002E45FD /* BenchmarkWrapper+Extensions.swift */; };
 		60B8892C256E834C003E93A0 /* BenchmarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B88919256E834A003E93A0 /* BenchmarkApp.swift */; };
 		60B8892D256E834C003E93A0 /* BenchmarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B88919256E834A003E93A0 /* BenchmarkApp.swift */; };
 		60B8892E256E834C003E93A0 /* BenchmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B8891A256E834A003E93A0 /* BenchmarkView.swift */; };
@@ -42,7 +42,7 @@
 		6078F25125751C620033537E /* BenchmarkCalculationAES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculationAES.swift; sourceTree = "<group>"; };
 		6078F258257530B10033537E /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculationPrime.swift; sourceTree = "<group>"; };
-		60A0D2492572CCEE002E45FD /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		60A0D2492572CCEE002E45FD /* BenchmarkWrapper+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BenchmarkWrapper+Extensions.swift"; sourceTree = "<group>"; };
 		60B88919256E834A003E93A0 /* BenchmarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkApp.swift; sourceTree = "<group>"; };
 		60B8891A256E834A003E93A0 /* BenchmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkView.swift; sourceTree = "<group>"; };
 		60B8891B256E834C003E93A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -108,7 +108,6 @@
 				60DE1F4D2578EAE100688D55 /* Model */,
 				6034B2E3257843720077774F /* Extensions */,
 				60D56BE925766AD60027DFEA /* Helper */,
-				60A0D2482572CCE0002E45FD /* Config */,
 				60A0D2442572CC6F002E45FD /* UI */,
 				60A02E2B256E91E000C0E36E /* Benchmark */,
 			);
@@ -139,14 +138,6 @@
 				6078F258257530B10033537E /* ScoreView.swift */,
 			);
 			path = Benchmark;
-			sourceTree = "<group>";
-		};
-		60A0D2482572CCE0002E45FD /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				60A0D2492572CCEE002E45FD /* AppConfig.swift */,
-			);
-			path = Config;
 			sourceTree = "<group>";
 		};
 		60B88913256E834A003E93A0 = {
@@ -241,6 +232,7 @@
 		60DE1F4D2578EAE100688D55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				60A0D2492572CCEE002E45FD /* BenchmarkWrapper+Extensions.swift */,
 				60DE1F502578EAF500688D55 /* Configuration.swift */,
 				60DE1F552578EB1900688D55 /* ListElement.swift */,
 			);
@@ -358,7 +350,7 @@
 				60DE1F562578EB1900688D55 /* ListElement.swift in Sources */,
 				6078F25225751C620033537E /* BenchmarkCalculationAES.swift in Sources */,
 				601BC8112576C99C0028CA8F /* ConfigurationSelectionView.swift in Sources */,
-				60A0D24A2572CCEE002E45FD /* AppConfig.swift in Sources */,
+				60A0D24A2572CCEE002E45FD /* BenchmarkWrapper+Extensions.swift in Sources */,
 				6078F259257530B10033537E /* ScoreView.swift in Sources */,
 				60B8892C256E834C003E93A0 /* BenchmarkApp.swift in Sources */,
 				6034B2E5257843870077774F /* DispatchTimeInterval+Extensions.swift in Sources */,
@@ -376,7 +368,7 @@
 				60B8892F256E834C003E93A0 /* BenchmarkView.swift in Sources */,
 				6034B2EA2578439F0077774F /* DispatchTimeInterval+Extensions.swift in Sources */,
 				6078F25325751C620033537E /* BenchmarkCalculationAES.swift in Sources */,
-				60A0D24F2572CD79002E45FD /* AppConfig.swift in Sources */,
+				60A0D24F2572CD79002E45FD /* BenchmarkWrapper+Extensions.swift in Sources */,
 				6078F25A257530B10033537E /* ScoreView.swift in Sources */,
 				60DE1F522578EAF500688D55 /* Configuration.swift in Sources */,
 				60B8892D256E834C003E93A0 /* BenchmarkApp.swift in Sources */,
