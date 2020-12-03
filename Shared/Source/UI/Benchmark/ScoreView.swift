@@ -12,9 +12,9 @@ struct ScoreView: View {
     let score: BenchmarkScore
     
     var body: some View {
-        HStack(alignment: .center, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
+        HStack(alignment: .center) {
             Spacer()
-            VStack(alignment: .leading, spacing: nil) {
+            VStack(alignment: .leading) {
                 Label(score.configuration.algorithm.name, systemImage: ListElement.algortihm.imageName)
                 Label(score.configuration.cpuCoreRunType.name, systemImage: ListElement.cpuCoreRunType.imageName)
                 Label(score.configuration.qualityOfService.name, systemImage: ListElement.qualityOfService.imageName)
@@ -24,7 +24,7 @@ struct ScoreView: View {
             Label("\(Int(Double(score.score).rounded() / Double(score.configuration.duration.seconds)))", systemImage: "rosette")
                 .font(.title)
             Spacer()
-        })
+        }
     }
 }
 

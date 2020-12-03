@@ -11,6 +11,7 @@ import BenchmarkWrapper
 struct ConfigurationSelectionView: View {
     private let imageNameSelected = "checkmark.circle.fill"
     private let imageNameUnselected = "circle"
+    let listElement: ListElement
     let elements: [Listable]
     @State var selectedIndex: Int
     var onSelectinChange: ((Int) -> Void)?
@@ -28,6 +29,7 @@ struct ConfigurationSelectionView: View {
                 )
             })
         }
+        .navigationTitle(Text(listElement.title))
     }
 }
 
@@ -35,6 +37,7 @@ struct ConfigurationSelectionView: View {
 struct ConfigurationSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         ConfigurationSelectionView(
+            listElement: .algortihm,
             elements: AvailableAlgortihm.allCases,
             selectedIndex: 1
         )

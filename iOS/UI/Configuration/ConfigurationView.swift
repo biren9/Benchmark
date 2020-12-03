@@ -20,6 +20,7 @@ struct ConfigurationView: View {
                     VStack {
                         NavigationLink(
                             destination: ConfigurationSelectionView(
+                                listElement: item,
                                 elements: listableElements(item),
                                 selectedIndex: selectedIndex(item),
                                 onSelectinChange: { selectedIndex in
@@ -29,7 +30,6 @@ struct ConfigurationView: View {
                         ) {
                             listLabel(item)
                         }
-                        .navigationTitle(Text("Configuration"))
                     }
                 }
 
@@ -45,7 +45,9 @@ struct ConfigurationView: View {
                     onDone?()
                     isPresented = false
                 }
-            }.padding(20)
+            }
+            .padding(20)
+            .navigationTitle(Text("Configuration"))
         }
     }
 
