@@ -28,14 +28,14 @@ struct BenchmarkView: View {
     
     var body: some View {
         VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing:40, content: {
-            HStack(alignment: .center, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
+            HStack(alignment: .center, spacing: nil, content: {
                 Spacer(minLength: 60)
                 ProgressView(progressTitle(), value: benchmarkService.progress, total: 1)
                 Spacer(minLength: 60)
             })
             benchmarkService.score.map { ScoreView(score: $0) }
             
-            HStack(alignment: .center, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
+            HStack(alignment: .center, spacing: nil, content: {
                 Spacer()
                 Button(benchmarkService.runningState == .running ? "Stop" : "Start") {
                     if benchmarkService.runningState == .running {
