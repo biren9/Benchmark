@@ -20,6 +20,8 @@ struct BenchmarkView: View {
     func progressTitle() -> String {
         if benchmarkService.runningState == .running {
             return "\(Int(benchmarkService.progress*100))%"
+        } else if benchmarkService.progress == 1 {
+            return "Done"
         }
         return "Benchmark"
     }

@@ -40,7 +40,7 @@ struct ConfigurationView: View {
                     .disabled(configuration.isStressTest)
                 
                 Toggle(isOn: $configuration.isStressTest) {
-                    Text("Stress Test")
+                    Text("Stress test")
                 }
                 .toggleStyle(SwitchToggleStyle(tint: .accentColor))
                 Button("Done") {

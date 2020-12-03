@@ -54,7 +54,7 @@ struct ConfigurationView: View {
                         Slider(value: $configuration.duration, in: 5...60, step: 5)
                             .disabled(configuration.isStressTest)
                         Toggle(isOn: $configuration.isStressTest) {
-                            Text("Stress Test")
+                            Text("Stress test")
                         }
                     }
                 }
@@ -76,7 +76,7 @@ struct ConfigurationView_Previews: PreviewProvider {
             isPresented: .constant(true),
             configuration: Configuration()
         )
-        .environment(\.sizeCategory, .small)
+        .preferredColorScheme(.dark)
     }
 }
 #endif
