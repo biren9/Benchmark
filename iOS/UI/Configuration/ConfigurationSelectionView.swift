@@ -9,6 +9,8 @@ import SwiftUI
 import BenchmarkWrapper
 
 struct ConfigurationSelectionView: View {
+    private let imageNameSelected = "checkmark.circle.fill"
+    private let imageNameUnselected = "circle"
     let listElement: ListElement
     @ObservedObject var configuration: Configuration
     
@@ -20,33 +22,33 @@ struct ConfigurationSelectionView: View {
                 }, label: {
                     Label(
                         item.algortihm.name,
-                        systemImage: item == configuration.algortihm ? "checkmark.circle.fill" : "circle"
+                        systemImage: item == configuration.algortihm ? imageNameSelected : imageNameUnselected
                     )
                 })
             }
-            .opacity(listElement == .algortihm ? 1 : 0)
+            
             List(CpuCoreRunType.allCases) { item in
                 Button(action: {
                     configuration.cpuCoreRunType = item
                 }, label: {
                     Label(
                         item.name,
-                        systemImage: item == configuration.cpuCoreRunType ? "checkmark.circle.fill" : "circle"
+                        systemImage: item == configuration.cpuCoreRunType ? imageNameSelected : imageNameUnselected
                     )
                 })
             }
-            .opacity(listElement == .cpuCoreRunType ? 1 : 0)
+            
             List(QualityOfService.allCases) { item in
                 Button(action: {
                     configuration.qualityOfService = item
                 }, label: {
                     Label(
                         item.name,
-                        systemImage: item == configuration.qualityOfService ? "checkmark.circle.fill" : "circle"
+                        systemImage: item == configuration.qualityOfService ? imageNameSelected : imageNameUnselected
                     )
                 })
             }
-            .opacity(listElement == .qualityOfService ? 1 : 0)
+            
         }
     }
 }
