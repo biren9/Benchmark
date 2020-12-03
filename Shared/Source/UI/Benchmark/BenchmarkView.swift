@@ -11,11 +11,7 @@ import BenchmarkWrapper
 struct BenchmarkView: View {
     @State private var isConfigurationVisible = false
     @ObservedObject private var benchmarkService =  BenchmarkServiceWrapper()
-    @State private var cpuCoreRunType: CpuCoreRunType = .multiCore
-    @State private var duration: TimeInterval = 10
-    @State private var algortihm: AvailableAlgortihm = .aes
-    @State private var qualityOfService: QualityOfService = .utility
-    @State private var isStressTest: Bool = false
+    @ObservedObject private var configuration = Configuration()
     
     init() {
         setConfiguration()
@@ -57,11 +53,7 @@ struct BenchmarkView: View {
                 }, content: {
                     ConfigurationView(
                         isPresented: $isConfigurationVisible,
-                        cpuCoreRunType: $cpuCoreRunType,
-                        algortihm: $algortihm,
-                        qualityOfService: $qualityOfService,
-                        duration: $duration,
-                        isStressTest: $isStressTest,
+                        configuration: configuration,
                         onDone: setConfiguration
                     )
                     .frame(minWidth: 300)
@@ -73,14 +65,14 @@ struct BenchmarkView: View {
     }
 
     private func setConfiguration() {
-        let configuration = BenchmarkConfiguration(
-            qualityOfService: qualityOfService,
-            algorithm: algortihm.algortihm,
-            cpuCoreRunType: cpuCoreRunType,
-            duration: isStressTest ? .never : .seconds(Int(duration))
+        let benchmarkConfiguration = BenchmarkConfiguration(
+            qualityOfService: configuration.qualityOfService,
+            algorithm: configuration.algortihm.algortihm,
+            cpuCoreRunType: configuration.cpuCoreRunType,
+            duration: configuration.isStressTest ? .never : .seconds(Int(configuration.duration))
         )
         benchmarkService.stop()
-        benchmarkService.setConfiguration(configuration)
+        benchmarkService.setConfiguration(benchmarkConfiguration)
     }
 }
 

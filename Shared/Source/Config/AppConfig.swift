@@ -64,6 +64,8 @@ extension CpuCoreRunType {
             return "SingleCore"
         case .multiCore:
             return "MultiCore"
+        case .custom(let cores):
+            return "\(cores) Cores"
         }
     }
 }

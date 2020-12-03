@@ -8,32 +8,9 @@
 import SwiftUI
 import BenchmarkWrapper
 
-enum ListElement: Identifiable, CaseIterable {
-    case cpuCoreRunType
-    case algortihm
-    case qualityOfService
-    
-    var id: UUID { UUID() }
-    
-    var title: String {
-        switch self {
-        case .algortihm:
-            return "Algorithm"
-        case .cpuCoreRunType:
-            return "CPU"
-        case .qualityOfService:
-            return "QualityOfService"
-        }
-    }
-}
-
 struct ConfigurationView: View {
     @Binding private(set) var isPresented: Bool
-    @Binding private(set) var cpuCoreRunType: CpuCoreRunType
-    @Binding private(set) var algortihm: AvailableAlgortihm
-    @Binding private(set) var qualityOfService: QualityOfService
-    @Binding private(set) var duration: TimeInterval
-    @Binding private(set) var isStressTest: Bool
+    @ObservedObject private(set) var configuration: Configuration
     private(set) var onDone: (() -> Void)?
     
     var body: some View {
@@ -44,20 +21,20 @@ struct ConfigurationView: View {
                         NavigationLink(
                             destination: ConfigurationSelectionView(
                                 listElement: item,
-                                cpuCoreRunType: $cpuCoreRunType,
-                                algortihm: $algortihm,
-                                qualityOfService: $qualityOfService)) {
+                                configuration: configuration
+                            )
+                        ) {
                             listLabel(item)
                         }
                         .navigationTitle(Text("Configuration"))
                     }
                 }
 
-                Text("Duration: \(FormatterHelper.formatteDuration(duration))")
-                Slider(value: $duration, in: 5...60, step: 5)
-                    .disabled(isStressTest)
+                Text("Duration: \(FormatterHelper.formatteDuration(configuration.duration))")
+                Slider(value: $configuration.duration, in: 5...60, step: 5)
+                    .disabled(configuration.isStressTest)
                 
-                Toggle(isOn: $isStressTest) {
+                Toggle(isOn: $configuration.isStressTest) {
                     Text("Stress Test")
                 }
                 .toggleStyle(SwitchToggleStyle(tint: .accentColor))
@@ -72,11 +49,11 @@ struct ConfigurationView: View {
     func listLabel(_ element: ListElement) -> some View {
         switch element {
         case .algortihm:
-            return Label(algortihm.algortihm.name, systemImage: "skew")
+            return Label(configuration.algortihm.algortihm.name, systemImage: "skew")
         case .cpuCoreRunType:
-            return Label(cpuCoreRunType.name, systemImage: "cpu")
+            return Label(configuration.cpuCoreRunType.name, systemImage: "cpu")
         case .qualityOfService:
-            return Label(qualityOfService.name, systemImage: "speedometer")
+            return Label(configuration.qualityOfService.name, systemImage: "speedometer")
         }
     }
 }
@@ -86,11 +63,7 @@ struct ConfigurationView_Previews: PreviewProvider {
     static var previews: some View {
         ConfigurationView(
             isPresented: .constant(true),
-            cpuCoreRunType: .constant(.multiCore),
-            algortihm: .constant(.aes),
-            qualityOfService: .constant(.utility),
-            duration: .constant(20),
-            isStressTest: .constant(true)
+            configuration: Configuration()
         )
         .preferredColorScheme(.dark)
     }
