@@ -18,22 +18,31 @@ struct ConfigurationView: View {
             Label("Configuration", systemImage: "gear")
                 .font(.title)
             
-            VStack {
-                Picker(selection: $configuration.algortihm, label: Text("Algorithm")) {
-                    ForEach(AvailableAlgortihm.allCases, id: \.self) {
-                        Text($0.algortihm.name)
+            VStack(alignment: .leading) {
+                  
+                VStack {
+                    Picker(
+                        selection: $configuration.algortihm,
+                        label: Label(ListElement.algortihm.title, systemImage: ListElement.algortihm.imageName)) {
+                        ForEach(AvailableAlgortihm.allCases, id: \.self) {
+                            Text($0.algortihm.name)
+                        }
                     }
-                }
-                
-                Picker(selection: $configuration.qualityOfService, label: Text("Quality of service")) {
-                    ForEach(QualityOfService.allCases, id: \.self) {
-                        Text($0.name)
+                    
+                    Picker(
+                        selection: $configuration.qualityOfService,
+                        label: Label(ListElement.qualityOfService.title, systemImage: ListElement.qualityOfService.imageName)) {
+                        ForEach(QualityOfService.allCases, id: \.self) {
+                            Text($0.name)
+                        }
                     }
-                }
-                
-                Picker(selection: $configuration.cpuCoreRunType, label: Text("CPU")) {
-                    ForEach(CpuCoreRunType.allCases, id: \.self) {
-                        Text($0.name)
+                    
+                    Picker(
+                        selection: $configuration.cpuCoreRunType,
+                        label: Label(ListElement.cpuCoreRunType.title, systemImage: ListElement.cpuCoreRunType.imageName)) {
+                        ForEach(CpuCoreRunType.allCases, id: \.self) {
+                            Text($0.name)
+                        }
                     }
                 }
                 
@@ -67,6 +76,7 @@ struct ConfigurationView_Previews: PreviewProvider {
             isPresented: .constant(true),
             configuration: Configuration()
         )
+        .environment(\.sizeCategory, .small)
     }
 }
 #endif

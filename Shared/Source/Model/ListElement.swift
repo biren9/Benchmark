@@ -34,7 +34,7 @@ enum ListElement: Identifiable, CaseIterable, UIRepresentable {
     var imageName: String {
         switch self {
         case .algortihm:
-            return "skew"
+            return "wrench.and.screwdriver"
         case .cpuCoreRunType:
             return "cpu"
         case .qualityOfService:
