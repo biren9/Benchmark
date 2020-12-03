@@ -8,7 +8,11 @@
 import Foundation
 import BenchmarkWrapper
 
-enum AvailableAlgortihm: CaseIterable, Identifiable {
+protocol Listable {
+    var name: String { get }
+}
+
+enum AvailableAlgortihm: CaseIterable, Identifiable, Listable {
     case prime
     case aes
     
@@ -22,13 +26,32 @@ enum AvailableAlgortihm: CaseIterable, Identifiable {
             return Algortihm(name: "AES encrypt / decrypt", type: BenchmarkCalculationAES.self)
         }
     }
+    
+    var name: String {
+        algortihm.name
+    }
 }
 
-extension CpuCoreRunType: Identifiable {
+extension CpuCoreRunType: Identifiable, Listable {
     public var id: UUID { UUID() }
+    
+    static var allCases: [CpuCoreRunType] {
+        [.singleCore, .multiCore]
+    }
+    
+    var name: String {
+        switch self {
+        case .singleCore:
+            return "SingleCore"
+        case .multiCore:
+            return "MultiCore"
+        case .custom(let cores):
+            return "\(cores) Cores"
+        }
+    }
 }
 
-extension QualityOfService: Identifiable {
+extension QualityOfService: Identifiable, Listable {
     public var id: UUID { UUID() }
     
     static var allCases: [QualityOfService] {
@@ -49,23 +72,6 @@ extension QualityOfService: Identifiable {
             return "Default"
         @unknown default:
             return "Unknown"
-        }
-    }
-}
-
-extension CpuCoreRunType {
-    static var allCases: [CpuCoreRunType] {
-        [.singleCore, .multiCore]
-    }
-    
-    var name: String {
-        switch self {
-        case .singleCore:
-            return "SingleCore"
-        case .multiCore:
-            return "MultiCore"
-        case .custom(let cores):
-            return "\(cores) Cores"
         }
     }
 }

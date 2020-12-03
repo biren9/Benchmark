@@ -11,44 +11,22 @@ import BenchmarkWrapper
 struct ConfigurationSelectionView: View {
     private let imageNameSelected = "checkmark.circle.fill"
     private let imageNameUnselected = "circle"
-    let listElement: ListElement
-    @ObservedObject var configuration: Configuration
+    let elements: [Listable]
+    @State var selectedIndex: Int
+    var onSelectinChange: ((Int) -> Void)?
     
     var body: some View {
-        ZStack {
-            List(AvailableAlgortihm.allCases) { item in
-                Button(action: {
-                    configuration.algortihm = item
-                }, label: {
-                    Label(
-                        item.algortihm.name,
-                        systemImage: item == configuration.algortihm ? imageNameSelected : imageNameUnselected
-                    )
-                })
-            }
-            
-            List(CpuCoreRunType.allCases) { item in
-                Button(action: {
-                    configuration.cpuCoreRunType = item
-                }, label: {
-                    Label(
-                        item.name,
-                        systemImage: item == configuration.cpuCoreRunType ? imageNameSelected : imageNameUnselected
-                    )
-                })
-            }
-            
-            List(QualityOfService.allCases) { item in
-                Button(action: {
-                    configuration.qualityOfService = item
-                }, label: {
-                    Label(
-                        item.name,
-                        systemImage: item == configuration.qualityOfService ? imageNameSelected : imageNameUnselected
-                    )
-                })
-            }
-            
+        List(0..<elements.count) { index in
+            let item = elements[index]
+            Button(action: {
+                selectedIndex = index
+                onSelectinChange?(index)
+            }, label: {
+                Label(
+                    item.name,
+                    systemImage: selectedIndex == index ? imageNameSelected : imageNameUnselected
+                )
+            })
         }
     }
 }
@@ -57,8 +35,8 @@ struct ConfigurationSelectionView: View {
 struct ConfigurationSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         ConfigurationSelectionView(
-            listElement: .algortihm,
-            configuration: Configuration()
+            elements: AvailableAlgortihm.allCases,
+            selectedIndex: 1
         )
     }
 }

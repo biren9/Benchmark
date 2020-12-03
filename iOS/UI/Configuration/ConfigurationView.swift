@@ -20,8 +20,11 @@ struct ConfigurationView: View {
                     VStack {
                         NavigationLink(
                             destination: ConfigurationSelectionView(
-                                listElement: item,
-                                configuration: configuration
+                                elements: listableElements(item),
+                                selectedIndex: selectedIndex(item),
+                                onSelectinChange: { selectedIndex in
+                                    selectIndex(selectedIndex, element: item)
+                                }
                             )
                         ) {
                             listLabel(item)
@@ -45,8 +48,41 @@ struct ConfigurationView: View {
             }.padding(20)
         }
     }
+
+    private func selectIndex(_ index: Int, element: ListElement) {
+        switch element {
+        case .algortihm:
+            configuration.algortihm = AvailableAlgortihm.allCases[index]
+        case .cpuCoreRunType:
+            configuration.cpuCoreRunType = CpuCoreRunType.allCases[index]
+        case .qualityOfService:
+            configuration.qualityOfService = QualityOfService.allCases[index]
+        }
+    }
     
-    func listLabel(_ element: ListElement) -> some View {
+    private func selectedIndex(_ element: ListElement) -> Int {
+        switch element {
+        case .algortihm:
+            return AvailableAlgortihm.allCases.firstIndex { $0 == configuration.algortihm } ?? 0
+        case .cpuCoreRunType:
+            return CpuCoreRunType.allCases.firstIndex { $0 == configuration.cpuCoreRunType } ?? 0
+        case .qualityOfService:
+            return QualityOfService.allCases.firstIndex { $0 == configuration.qualityOfService } ?? 0
+        }
+    }
+    
+    private func listableElements(_ element: ListElement) -> [Listable] {
+        switch element {
+        case .algortihm:
+            return AvailableAlgortihm.allCases
+        case .cpuCoreRunType:
+            return CpuCoreRunType.allCases
+        case .qualityOfService:
+            return QualityOfService.allCases
+        }
+    }
+    
+    private func listLabel(_ element: ListElement) -> some View {
         switch element {
         case .algortihm:
             return Label(configuration.algortihm.algortihm.name, systemImage: element.imageName)
