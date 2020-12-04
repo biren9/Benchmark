@@ -10,6 +10,8 @@
 		601BC8112576C99C0028CA8F /* ConfigurationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601BC8102576C99C0028CA8F /* ConfigurationSelectionView.swift */; };
 		6034B2E5257843870077774F /* DispatchTimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034B2E4257843870077774F /* DispatchTimeInterval+Extensions.swift */; };
 		6034B2EA2578439F0077774F /* DispatchTimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034B2E4257843870077774F /* DispatchTimeInterval+Extensions.swift */; };
+		6042ECF7257AC85F0072A3EE /* CPUService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042ECF6257AC85F0072A3EE /* CPUService.swift */; };
+		6042ECFC257AD7440072A3EE /* CPUService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042ECF6257AC85F0072A3EE /* CPUService.swift */; };
 		6078F25225751C620033537E /* BenchmarkCalculationAES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078F25125751C620033537E /* BenchmarkCalculationAES.swift */; };
 		6078F25325751C620033537E /* BenchmarkCalculationAES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078F25125751C620033537E /* BenchmarkCalculationAES.swift */; };
 		6078F259257530B10033537E /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078F258257530B10033537E /* ScoreView.swift */; };
@@ -39,6 +41,7 @@
 /* Begin PBXFileReference section */
 		601BC8102576C99C0028CA8F /* ConfigurationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationSelectionView.swift; sourceTree = "<group>"; };
 		6034B2E4257843870077774F /* DispatchTimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchTimeInterval+Extensions.swift"; sourceTree = "<group>"; };
+		6042ECF6257AC85F0072A3EE /* CPUService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPUService.swift; sourceTree = "<group>"; };
 		6078F25125751C620033537E /* BenchmarkCalculationAES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculationAES.swift; sourceTree = "<group>"; };
 		6078F258257530B10033537E /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		60A02E2C256E920C00C0E36E /* BenchmarkCalculationPrime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkCalculationPrime.swift; sourceTree = "<group>"; };
@@ -86,6 +89,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		6042ECF5257AC8470072A3EE /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6042ECF6257AC85F0072A3EE /* CPUService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		60A02E2B256E91E000C0E36E /* Benchmark */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +116,7 @@
 		60A0D2422572CC4A002E45FD /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				6042ECF5257AC8470072A3EE /* Service */,
 				60DE1F4D2578EAE100688D55 /* Model */,
 				6034B2E3257843720077774F /* Extensions */,
 				60D56BE925766AD60027DFEA /* Helper */,
@@ -357,6 +369,7 @@
 				60A02E2D256E920C00C0E36E /* BenchmarkCalculationPrime.swift in Sources */,
 				60D56BDE257668870027DFEA /* ConfigurationView.swift in Sources */,
 				60DE1F512578EAF500688D55 /* Configuration.swift in Sources */,
+				6042ECFC257AD7440072A3EE /* CPUService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6042ECF7257AC85F0072A3EE /* CPUService.swift in Sources */,
 				60D56BEB25766AEC0027DFEA /* FormatterHelper.swift in Sources */,
 				60B8892F256E834C003E93A0 /* BenchmarkView.swift in Sources */,
 				6034B2EA2578439F0077774F /* DispatchTimeInterval+Extensions.swift in Sources */,
