@@ -21,9 +21,11 @@ class CPUService: ObservableObject {
     private var numPrevCpuInfo: mach_msg_type_number_t = 0
     private var numCPUs: uint = 0
     private var updateTimer: Timer!
-    private let CPUUsageLock: NSLock = NSLock()
+    private let CPUUsageLock = NSLock()
+    private let timerUpdateInterval: TimeInterval
     
     init(timerUpdateInterval: TimeInterval) {
+        self.timerUpdateInterval = timerUpdateInterval
         let mibKeys: [Int32] = [CTL_HW, HW_NCPU]
         // sysctl Swift usage credit Matt Gallagher: https://github.com/mattgallagher/CwlUtils/blob/master/Sources/CwlUtils/CwlSysctl.swift
         mibKeys.withUnsafeBufferPointer() { mib in
@@ -32,22 +34,33 @@ class CPUService: ObservableObject {
             if status != 0 {
                 numCPUs = 1
             }
-            updateTimer = Timer.scheduledTimer(withTimeInterval: timerUpdateInterval, repeats: true, block: { [weak self] _ in
-                guard let self = self else { return }
-                self.updateInfo()
-            })
+            beginUpdate()
             updateInfo()
         }
     }
     
-    @objc private func updateInfo() {
+    func beginUpdate() {
+        createTimer()
+    }
+    
+    func stopUpdate() {
+        updateTimer.invalidate()
+    }
+    
+    private func createTimer() {
+        updateTimer = Timer.scheduledTimer(withTimeInterval: timerUpdateInterval, repeats: true, block: { [weak self] _ in
+            guard let self = self else { return }
+            self.updateInfo()
+        })
+    }
+    
+    private func updateInfo() {
         var numCPUsU: natural_t = 0
         let err: kern_return_t = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numCPUsU, &cpuInfo, &numCpuInfo);
         if err == KERN_SUCCESS {
-            CPUUsageLock.lock()
-            
             var newCoresInfo: [CpuCoreInfo] = []
             
+            CPUUsageLock.lock()
             for i in 0 ..< Int32(numCPUs) {
                 var inUse: Int32
                 var total: Int32
@@ -74,9 +87,9 @@ class CPUService: ObservableObject {
                     )
                 )
             }
-            coresInfo = newCoresInfo
             CPUUsageLock.unlock()
             
+            coresInfo = newCoresInfo
             if let prevCpuInfo = prevCpuInfo {
                 // vm_deallocate Swift usage credit rsfinn: https://stackoverflow.com/a/48630296/1033581
                 let prevCpuInfoSize: size_t = MemoryLayout<integer_t>.stride * Int(numPrevCpuInfo)
