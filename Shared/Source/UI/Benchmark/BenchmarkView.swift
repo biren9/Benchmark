@@ -14,7 +14,7 @@ struct BenchmarkView: View {
     @ObservedObject private var configuration = Configuration()
     @ObservedObject private var cpuService = CPUService(timerUpdateInterval: 0.5)
     
-    private let cpuGraphHeight: CGFloat = 20
+    private let cpuGraphSize = CGSize(width: 20, height: 25)
     
     init() {
         setConfiguration()
@@ -39,17 +39,22 @@ struct BenchmarkView: View {
             
             HStack(alignment: .bottom) {
                 ForEach(cpuService.coresInfo) { item in
+                    VStack {
                     ZStack(alignment: Alignment(horizontal: .leading, vertical: .bottom)) {
                         Rectangle()
                             .foregroundColor(.gray)
-                            .frame(width: cpuGraphHeight, height: cpuGraphHeight)
+                            .frame(width: cpuGraphSize.width, height: cpuGraphSize.height)
                         Rectangle()
                             .foregroundColor(.accentColor)
-                            .frame(width: cpuGraphHeight, height: max(CGFloat(item.usage)*cpuGraphHeight, 1))
+                            .animation(.linear)
+                            .clipped()
+                            .frame(width: cpuGraphSize.width, height: CGFloat(item.usage)*cpuGraphSize.height)
+                    }
+                    .frame(minHeight: cpuGraphSize.height, idealHeight: cpuGraphSize.height, maxHeight: cpuGraphSize.height)
+                        Text("\(item.id)")
                     }
                 }
             }
-            .frame(minHeight: cpuGraphHeight, idealHeight: cpuGraphHeight, maxHeight: cpuGraphHeight)
             
             benchmarkService.score.map { ScoreView(score: $0) }
             
