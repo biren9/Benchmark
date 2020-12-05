@@ -21,7 +21,7 @@ class CPUService: ObservableObject {
     private var numPrevCpuInfo: mach_msg_type_number_t = 0
     private var numCPUs: uint = 0
     private var updateTimer: Timer!
-    private let CPUUsageLock = NSLock()
+    private let cpuUsageLock = NSLock()
     private let timerUpdateInterval: TimeInterval
     
     init(timerUpdateInterval: TimeInterval) {
@@ -60,7 +60,7 @@ class CPUService: ObservableObject {
         if err == KERN_SUCCESS {
             var newCoresInfo: [CpuCoreInfo] = []
             
-            CPUUsageLock.lock()
+            cpuUsageLock.lock()
             for i in 0 ..< Int32(numCPUs) {
                 var inUse: Int32
                 var total: Int32
@@ -87,7 +87,7 @@ class CPUService: ObservableObject {
                     )
                 )
             }
-            CPUUsageLock.unlock()
+            cpuUsageLock.unlock()
             
             coresInfo = newCoresInfo
             if let prevCpuInfo = prevCpuInfo {
