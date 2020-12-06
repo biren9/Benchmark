@@ -39,13 +39,13 @@ struct ConfigurationView: View {
                 Slider(value: $configuration.duration, in: 5...60, step: 5)
                     .disabled(configuration.isStressTest)
                 
+                Text( "Thread priority: \(FormatterHelper.formatteNumber(configuration.threadPriority, decimalPlaces: 2))")
+                Slider(value: $configuration.threadPriority, in: 0...1)
+                
                 Toggle(isOn: $configuration.isStressTest) {
                     Text("Stress test")
                 }
                 .toggleStyle(SwitchToggleStyle(tint: .accentColor))
-                
-                Text( "Thread priority: -")
-                Slider(value: $configuration.threadPriority, in: 0...1)
                 
                 Button("Done") {
                     onDone?()

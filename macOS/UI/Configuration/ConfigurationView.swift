@@ -58,7 +58,7 @@ struct ConfigurationView: View {
                         }
                     }
                     
-                    Text( "Thread priority: -")
+                    Text( "Thread priority: \(FormatterHelper.formatteNumber(configuration.threadPriority, decimalPlaces: 2))")
                     Slider(value: $configuration.threadPriority, in: 0...1)
                 }
             }

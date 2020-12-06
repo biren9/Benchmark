@@ -13,4 +13,11 @@ class FormatterHelper {
         let measurement = Measurement(value: number, unit: UnitDuration.seconds)
         return formatter.string(from: measurement)
     }
+    
+    static func formatteNumber(_ number: Double, decimalPlaces: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = decimalPlaces
+        return formatter.string(from: NSNumber(value: number)) ?? ""
+    }
 }
