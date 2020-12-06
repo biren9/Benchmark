@@ -36,6 +36,7 @@ struct ScoreView_Previews: PreviewProvider {
                 score: 100000,
                 configuration: BenchmarkConfiguration(
                     qualityOfService: .utility,
+                    threadPriority: 1,
                     algorithm: AvailableAlgortihm.aes.algortihm,
                     cpuCoreRunType: .multiCore,
                     duration: .seconds(10)

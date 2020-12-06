@@ -57,6 +57,9 @@ struct ConfigurationView: View {
                             Text("Stress test")
                         }
                     }
+                    
+                    Text( "Thread priority: -")
+                    Slider(value: $configuration.threadPriority, in: 0...1)
                 }
             }
             

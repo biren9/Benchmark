@@ -12,7 +12,7 @@ struct BenchmarkView: View {
     @State private var isConfigurationVisible = false
     @ObservedObject private var benchmarkService =  BenchmarkServiceWrapper()
     @ObservedObject private var configuration = Configuration()
-    @ObservedObject private var cpuService = CPUService(timerUpdateInterval: 0.5)
+    @ObservedObject private var cpuService = CPUService(timerUpdateInterval: 1)
     
     private let cpuGraphSize = CGSize(width: 20, height: 25)
     
@@ -46,9 +46,9 @@ struct BenchmarkView: View {
                             .frame(width: cpuGraphSize.width, height: cpuGraphSize.height)
                         Rectangle()
                             .foregroundColor(.accentColor)
-                            .animation(.linear)
                             .clipped()
                             .frame(width: cpuGraphSize.width, height: CGFloat(item.usage)*cpuGraphSize.height)
+                            .animation(.spring())
                     }
                     .frame(minHeight: cpuGraphSize.height, idealHeight: cpuGraphSize.height, maxHeight: cpuGraphSize.height)
                         Text("\(item.id)")
@@ -92,6 +92,7 @@ struct BenchmarkView: View {
     private func setConfiguration() {
         let benchmarkConfiguration = BenchmarkConfiguration(
             qualityOfService: configuration.qualityOfService,
+            threadPriority: configuration.threadPriority,
             algorithm: configuration.algortihm.algortihm,
             cpuCoreRunType: configuration.cpuCoreRunType,
             duration: configuration.isStressTest ? .never : .seconds(Int(configuration.duration))

@@ -10,6 +10,7 @@ import SwiftUI
 
 class Configuration: ObservableObject {
     @Published var cpuCoreRunType: CpuCoreRunType = .multiCore
+    @Published var threadPriority: Double = 1
     @Published var algortihm: AvailableAlgortihm = .aes
     @Published var qualityOfService: QualityOfService = .utility
     @Published var duration: TimeInterval = 5

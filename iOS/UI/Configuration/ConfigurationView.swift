@@ -43,6 +43,10 @@ struct ConfigurationView: View {
                     Text("Stress test")
                 }
                 .toggleStyle(SwitchToggleStyle(tint: .accentColor))
+                
+                Text( "Thread priority: -")
+                Slider(value: $configuration.threadPriority, in: 0...1)
+                
                 Button("Done") {
                     onDone?()
                     isPresented = false
